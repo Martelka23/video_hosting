@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import ApiError from "../exceptions/api-error";
 import tokenService from "../services/token.service";
-import { TokenPayload } from "../@types/models/token.types";
+import { TokenPayload } from "../@types/models/token";
 
 function isAuth(req: Request, res: Response, next: NextFunction) {
   try {

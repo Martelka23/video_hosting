@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { TokenPayload } from "../@types/models/token.types";
+import { TokenPayload } from "../@types/models/token";
 import ApiError from "../exceptions/api-error";
 
 function checkRole(roles: string[]) {

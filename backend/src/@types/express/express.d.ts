@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { TokenPayload } from "../models/token.types";
+import { TokenPayload } from "../models/token";
 
 // declare global {
 //   namespace Express {

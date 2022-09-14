@@ -1,4 +1,4 @@
-import { JwtTokens } from "./token.types";
+import { JwtTokens } from "./token";
 
 interface User {
   id: number,

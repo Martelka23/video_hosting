@@ -6,7 +6,7 @@ import tokenService from './token.service';
 import User, { LoginUserDb } from "../@types/models/user";
 import { CreateUserDto } from "../@types/dto/user.dto";
 import { CreatedUserDb, CreateUserDb } from "../@types/models/user";
-import Token, { CreateTokenDb, JwtTokens, TokenPayload } from '../@types/models/token.types';
+import Token, { CreateTokenDb, JwtTokens, TokenPayload } from '../@types/models/token';
 import emailService from './email.service';
 import ApiError from '../exceptions/api-error';
 import tokenDal from '../dal/token.dal';
@@ -25,6 +25,8 @@ class AuthService {
       createdAt: new Date().toISOString().split('T')[0]
     };
     const activationLink: string = v4();
+    // await emailService.sendActivationMail(createUserDb.email, `${process.env.API_URL}/api/auth/activate/${activationLink}`);
+
     const newUser: User = await userDal.create(createUserDb);
 
     const tokenPayload: TokenPayload = {
@@ -41,7 +43,6 @@ class AuthService {
       activationLink
     };
     await tokenService.saveToken(createTokenDb);
-    await emailService.sendActivationMail(newUser.email, `${process.env.API_URL}/api/auth/activate/${activationLink}`);
 
     return { user: newUser, tokens: jwtTokens };
   }
