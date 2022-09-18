@@ -29,7 +29,7 @@ $api.interceptors.response.use(
       console.log('refresh');
       originalRequest.headers._isRetry = true;
       try {
-        const jwtTokens = await axios.get<JwtTokens>('http://localhost/api/auth/refresh', { withCredentials: true });
+        const jwtTokens = await axios.get<JwtTokens>('http://localhost:3005/api/auth/refresh', { withCredentials: true });
         localStorage.setItem('accessToken', jwtTokens.data.accessToken);
         return $api.request(originalRequest);
       } catch (err) {

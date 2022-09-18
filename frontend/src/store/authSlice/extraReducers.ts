@@ -20,15 +20,19 @@ export const authExtraReducers = (builder: ActionReducerMapBuilder<AuthState>): 
       console.log('result ', action.payload.tokens.accessToken)
       console.log(localStorage.getItem('accessToken'));
     })
+
     .addCase(authLoginThunk.pending, (state, action) => {
       state.isLoading = true;
       state.error = null;
     })
     .addCase(authLoginThunk.fulfilled, (state, action) => {
       state.user = action.payload.user;
+      console.log(action.payload.user);
+      console.log('result ', action.payload.tokens.accessToken)
       localStorage.setItem('accessToken', action.payload.tokens.accessToken);
       state.isLoading = false;
     })
+
     .addCase(authLogoutThunk.pending, (state, action) => {
       state.isLoading = true;
       state.error = null;
@@ -37,9 +41,10 @@ export const authExtraReducers = (builder: ActionReducerMapBuilder<AuthState>): 
       state.user = null;
       localStorage.removeItem('accessToken');
     })
-    // .addMatcher(isError, (state, action: PayloadAction<string>) => {
-    //   state.error = action.payload;
-    //   console.log('error!', action.payload)
-    //   state.isLoading = false;
-    // })
+
+    .addMatcher(isError, (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      console.log('error!', action.payload)
+      state.isLoading = false;
+    })
 }

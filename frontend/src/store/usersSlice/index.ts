@@ -3,7 +3,9 @@ import { usersExtraReducer } from "./extraReducer";
 import { UsersState } from "./types";
 
 const initialState: UsersState = {
-  users: []
+  users: [],
+  userProfile: undefined,
+  currentUser: undefined
 }
 
 const usersSlice = createSlice({

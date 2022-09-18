@@ -15,3 +15,28 @@ export const UsersGetAllThunk = createAsyncThunk<User[], undefined, { rejectValu
     return response.data;
   }
 );
+
+export const UsersGetByIdThunk = createAsyncThunk<User, number, { rejectValue: RequestError }>(
+  'users/getById',
+  async function (id, { rejectWithValue }): Promise<User> {
+    const response = await userService.getById(id);
+    if (response.status >= 300) {
+      rejectWithValue({ status: response.status, message: 'Get user error' });
+    }
+
+    return response.data;
+  }
+);
+
+export const usersGetCurrentUserThunk = createAsyncThunk<User, undefined, { rejectValue: RequestError }> (
+  'users/current_user',
+  async function (_, { rejectWithValue }): Promise<User> {
+    const response = await userService.getCurrentUser();
+
+    if (response.status >= 300) {
+      rejectWithValue({ status: response.status, message: 'Get current user error' });
+    }
+
+    return response.data;
+  }
+);

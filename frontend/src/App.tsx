@@ -1,43 +1,42 @@
-import { MouseEvent, useEffect, useState } from 'react';
-import './App.css';
-import RegistrationForm from './components/forms/RegistrationForm';
+import { Routes, Route } from 'react-router-dom';
+
+import Users from './pages/users/Users';
+import Login from './pages/auth/login/Login';
+import Signup from './pages/auth/signup/Signup';
+import NavBar from './components/navbar/NavBar';
+import Logout from './pages/auth/logout/Logout';
+import UserProfile from './pages/users/user-profile/UserProfile';
+
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { authSignupThunk } from './store/authSlice/thunks';
-import { UsersGetAllThunk } from './store/usersSlice/thunks';
-import User from './@types/models/user';
+import { usersGetCurrentUserThunk } from './store/usersSlice/thunks';
+
+import './App.css';
+import SideBar from './components/sidebar/SideBar';
+
 
 function App() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const users: User[] = useAppSelector(state => state.usersReducer.users);
-  const user: User | null = useAppSelector(state => state.authReducer.user);
-
+  const user = useAppSelector(state => state.usersReducer.currentUser);
   const dispatch = useAppDispatch();
 
-  const submit = (event: MouseEvent<HTMLElement>) => {
-    dispatch(authSignupThunk({ username, email, password }));
-    // setUsername('');
-    // setEmail('');
-    // setPassword('');
-  }
-
   useEffect(() => {
-    dispatch(UsersGetAllThunk())
-  }, [dispatch]);
+    dispatch(usersGetCurrentUserThunk());
+  }, []);
 
   return (
-    <div>
-      <RegistrationForm
-        username={username}
-        setUsername={event => setUsername(event.target.value)}
-        email={email}
-        setEmail={event => setEmail(event.target.value)}
-        password={password}
-        setPassword={event => setPassword(event.target.value)}
-        submit={submit}
-      />
-      <div>{users.length ? users.map(user => <h3 key={user.id}>{user.email}</h3>) : "Авторизуйтесь!"}</div>
+    <div className='background'>
+      <NavBar user={user} />
+      <SideBar user={user} />
+      <div className='pages'>
+        <Routes>
+          <Route path='/users' element={<Users />} />
+          <Route path='/users/profile/:id' element={<UserProfile />} />
+
+          <Route path='/auth/signup' element={<Signup />} />
+          <Route path='/auth/login' element={<Login />} />
+          <Route path='/auth/logout' element={<Logout />} />
+        </Routes>
+      </div>
     </div>
   );
 }

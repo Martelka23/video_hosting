@@ -21,7 +21,7 @@ class AuthController {
         httpOnly: true
         // secure: true
       });
-      res.status(201).json(newUser);
+      res.status(201).json(newUser).redirect(process.env.SITE_URL as string);
     } catch (err) {
       next(err);
     }
@@ -36,7 +36,7 @@ class AuthController {
         httpOnly: true
         // secure: true
       });
-      res.json(user);
+      res.json(user).redirect(process.env.SITE_URL as string);
     } catch (err) {
       next(err);
     }

@@ -16,6 +16,7 @@ function isAuth(req: Request, res: Response, next: NextFunction) {
     }
 
     res.locals.tokenPayload = userData;
+    console.log('Auth succ')
     next();
   } catch (err) {
     next(err);

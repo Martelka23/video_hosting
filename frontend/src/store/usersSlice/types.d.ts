@@ -1,3 +1,7 @@
+import User from "../../@types/models/user";
+
 export interface UsersState {
-  users: User[]
+  users: User[],
+  userProfile: User | undefined,
+  currentUser: User | undefined
 }

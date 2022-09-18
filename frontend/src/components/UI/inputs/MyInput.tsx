@@ -1,5 +1,7 @@
 import { ChangeEvent } from "react";
 
+import './my-input.css';
+
 interface MyInputProps {
   value: string,
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
@@ -8,7 +10,7 @@ interface MyInputProps {
 
 function MyInput({ value, onChange, placeholder }: MyInputProps) {
   return (
-    <input 
+    <input className="my-input"
       value={value}
       onChange={onChange}
       placeholder={placeholder}

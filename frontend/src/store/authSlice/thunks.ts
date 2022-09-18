@@ -37,4 +37,4 @@ export const authLogoutThunk = createAsyncThunk<string, undefined, { rejectValue
 
     return response.data;
   }
-)
+);

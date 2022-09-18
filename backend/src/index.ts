@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.router';
 import errorMiddleware from './middlewares/error.middleware';
 import usersRouter from './routes/users.router';
+import channelsRouter from './routes/channels.router';
 
 config({ path: './.env' });
 
@@ -22,6 +23,9 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/channels', channelsRouter);
+
+app.use('/api/images', express.static('content'));
 
 app.use(errorMiddleware);
 

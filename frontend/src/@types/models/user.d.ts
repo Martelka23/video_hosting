@@ -5,6 +5,7 @@ interface User {
   username: string,
   email: string,
   password: string,
+  img: string,
   isBanned: boolean,
   banReason: string,
   createdAt: Date,
