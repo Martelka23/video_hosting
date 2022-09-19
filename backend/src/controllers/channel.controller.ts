@@ -22,6 +22,16 @@ class ChannelController {
     }
   }
 
+  async getByUserId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.params;
+      const channels: Channel[] = await channelService.find({ userId: Number(userId) });
+      res.json(channels);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       const createChannelDb: CreateChannelDb = req.body;

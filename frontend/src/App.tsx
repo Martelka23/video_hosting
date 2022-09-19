@@ -13,6 +13,7 @@ import { usersGetCurrentUserThunk } from './store/usersSlice/thunks';
 
 import './App.css';
 import SideBar from './components/sidebar/SideBar';
+import Channels from './pages/channels/Channels';
 
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
         <Routes>
           <Route path='/users' element={<Users />} />
           <Route path='/users/profile/:id' element={<UserProfile />} />
+
+          <Route path='/channels' element={<Channels />} />
 
           <Route path='/auth/signup' element={<Signup />} />
           <Route path='/auth/login' element={<Login />} />

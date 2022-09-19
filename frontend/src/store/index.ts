@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import usersReducer from "./usersSlice";
+import channelsReducer from "./channelsSlice";
 
 
 const mainReducer = combineReducers({
   usersReducer,
-  authReducer
+  authReducer,
+  channelsReducer
 })
 
 const store = configureStore({

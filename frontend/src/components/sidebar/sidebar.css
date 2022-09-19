@@ -85,9 +85,9 @@
   /* color: #00c5fc; */
 }
 
-/* .sidebar-content > a svg {
-  transition: color 0.05s;
-} */
+.sidebar-content > a svg {
+  width: 38px;
+}
 
 .sidebar-content > a span {
   /* transition: transform 0.3s, color 0.05s; */
