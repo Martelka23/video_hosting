@@ -33,11 +33,11 @@ function Channels() {
   ));
 
   return (
-    <div className="channels-page">
+    // <div className="channels-page">
       <div className="channels-page-container">
         {Channels}
       </div>
-    </div>
+    // </div>
   );
 }
 

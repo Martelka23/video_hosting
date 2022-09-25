@@ -7,11 +7,11 @@ class ChannelService {
     return await $api.get('/channels/all');
   }
 
-  async getById(id: number): Promise<AxiosResponse<Channel[]>> {
+  async getById(id: number): Promise<AxiosResponse<Channel>> {
     return await $api.get(`/channels/channel/${id}`);
   }
 
-  async getByUserId(userId: number): Promise<AxiosResponse<Channel[]>> {
+  async getByUserId(userId: number): Promise<AxiosResponse<Channel>> {
     return await $api.get(`/channels/userChannel/${userId}`);
   }
 }

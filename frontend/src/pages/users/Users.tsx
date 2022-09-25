@@ -32,11 +32,11 @@ function Users() {
   ));
 
   return (
-    <div className="users-page">
+    // <div className="users-page">
       <div className="users-page-container">
         {Users}
       </div>
-    </div>
+    // </div>
   );
 }
 

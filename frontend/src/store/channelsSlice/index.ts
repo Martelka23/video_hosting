@@ -3,7 +3,8 @@ import { channelsExtraReducer } from "./extraReducers";
 import { ChannelsState } from "./types";
 
 const initialState: ChannelsState = {
-  channels: null
+  channels: null,
+  channel: null
 };
 
 const channelsSlice = createSlice({

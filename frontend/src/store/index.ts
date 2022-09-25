@@ -1,14 +1,16 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import usersReducer from "./usersSlice";
+import videoReducer from "./videoSlice";
 import channelsReducer from "./channelsSlice";
 
 
 const mainReducer = combineReducers({
-  usersReducer,
   authReducer,
+  usersReducer,
+  videoReducer,
   channelsReducer
-})
+});
 
 const store = configureStore({
   reducer: mainReducer

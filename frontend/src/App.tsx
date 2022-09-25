@@ -14,6 +14,8 @@ import { usersGetCurrentUserThunk } from './store/usersSlice/thunks';
 import './App.css';
 import SideBar from './components/sidebar/SideBar';
 import Channels from './pages/channels/Channels';
+import ChannelPage from './pages/channels/channel-page/ChannelPage';
+import VideoPage from './pages/videos/video-page/VideoPage';
 
 
 function App() {
@@ -28,18 +30,21 @@ function App() {
     <div className='background'>
       <NavBar user={user} />
       <SideBar user={user} />
-      <div className='pages'>
+      {/* <div className='pages'> */}
         <Routes>
           <Route path='/users' element={<Users />} />
           <Route path='/users/profile/:id' element={<UserProfile />} />
 
           <Route path='/channels' element={<Channels />} />
+          <Route path='/channels/channel/:id' element={<ChannelPage />} />
+
+          <Route path='/videos/watch/:id' element={<VideoPage />} />
 
           <Route path='/auth/signup' element={<Signup />} />
           <Route path='/auth/login' element={<Login />} />
           <Route path='/auth/logout' element={<Logout />} />
         </Routes>
-      </div>
+      {/* </div> */}
     </div>
   );
 }

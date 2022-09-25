@@ -15,9 +15,9 @@ export const ChannelsGetAllThunk = createAsyncThunk<Channel[], undefined, { reje
   }
 );
 
-export const ChannelsGetByIdThunk = createAsyncThunk<Channel[], number, { rejectValue: RequestError }>(
+export const ChannelsGetByIdThunk = createAsyncThunk<Channel, number, { rejectValue: RequestError }>(
   'channels/getById',
-  async function (channelId, { rejectWithValue }): Promise<Channel[]> {
+  async function (channelId, { rejectWithValue }): Promise<Channel> {
     const response = await channelService.getById(channelId);
     if (response.status !== 200) {
       rejectWithValue({ status: response.status, message: 'Channels get by id error' });
@@ -27,9 +27,9 @@ export const ChannelsGetByIdThunk = createAsyncThunk<Channel[], number, { reject
   }
 );
 
-export const ChannelsGetByUserIdThunk = createAsyncThunk<Channel[], number, { rejectValue: RequestError }>(
+export const ChannelsGetByUserIdThunk = createAsyncThunk<Channel, number, { rejectValue: RequestError }>(
   'channels/getByUserId',
-  async function (userId, { rejectWithValue }): Promise<Channel[]> {
+  async function (userId, { rejectWithValue }): Promise<Channel> {
     const response = await channelService.getByUserId(userId);
     if (response.status !== 200) {
       rejectWithValue({ status: response.status, message: 'Channels get by userId error' });

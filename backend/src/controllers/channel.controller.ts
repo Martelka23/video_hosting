@@ -16,7 +16,12 @@ class ChannelController {
     try {
       const { id } = req.params;
       const channels: Channel[] = await channelService.find({ id: Number(id) });
-      res.json(channels);
+      if (channels.length > 0) {
+        const channel: Channel = channels[0];
+        res.json(channel);
+      } else {
+        res.status(404).json({ message: "Channel not found!" });
+      }
     } catch (err) {
       next(err);
     }
@@ -26,7 +31,12 @@ class ChannelController {
     try {
       const { userId } = req.params;
       const channels: Channel[] = await channelService.find({ userId: Number(userId) });
-      res.json(channels);
+      if (channels.length > 0) {
+        const channel: Channel = channels[0];
+        res.json(channel);
+      } else {
+        res.status(404).json({ message: "Channel not found!" });
+      }
     } catch (err) {
       next(err);
     }
