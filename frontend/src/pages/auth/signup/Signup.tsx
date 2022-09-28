@@ -1,12 +1,11 @@
 import { MouseEvent, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-import RegistrationForm from "../../../components/forms/auth/signup/RegistrationForm";
+import RegistrationForm from "../../../components/forms/auth/RegistrationForm";
 import MyButton from "../../../components/UI/buttons/MyButton";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { authSignupThunk } from "../../../store/authSlice/thunks";
 
-import '../auth-page.css';
 
 
 interface SignupProps {
@@ -37,7 +36,7 @@ function Signup(props: SignupProps) {
 
   return (
     <div className="auth-page">
-      <div className="auth-page-container">
+      <div className="auth-page__container">
         <h1>Sign up</h1>
         <RegistrationForm
           username={username}

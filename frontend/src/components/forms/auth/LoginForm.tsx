@@ -1,9 +1,8 @@
 import { ChangeEvent, MouseEvent } from "react";
-import MyButton from "../../../UI/buttons/MyButton";
-import MyInput from "../../../UI/inputs/MyInput";
+import MyButton from "../../UI/buttons/MyButton";
+import MyInput from "../../UI/inputs/MyInput";
 import { Link } from 'react-router-dom';
 
-import '../auth-form.css'
 
 interface LoginFormProps {
   email: string,
@@ -19,8 +18,8 @@ function LoginForm({
   submit
 }: LoginFormProps) {
   return (
-    <form className="auth-form" onSubmit={event => event.preventDefault()}>
-      <div className="auth-inputs">
+    <form className="auth__form" onSubmit={event => event.preventDefault()}>
+      <div className="auth__inputs">
         <MyInput
           value={email}
           placeholder="email"
@@ -32,9 +31,9 @@ function LoginForm({
           onChange={setPassword}
         />
       </div>
-      <div className="auth-buttons">
+      <div className="auth__buttons">
         <MyButton onClick={submit}>Login</MyButton>
-        <div className="auth-links">
+        <div className="auth__links">
           <Link to="/auth/signup">
             <MyButton onClick={(_) => { }}>I don't have an account</MyButton>
           </Link>

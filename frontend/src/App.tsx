@@ -3,18 +3,17 @@ import { Routes, Route } from 'react-router-dom';
 import Users from './pages/users/Users';
 import Login from './pages/auth/login/Login';
 import Signup from './pages/auth/signup/Signup';
-import NavBar from './components/navbar/NavBar';
+import NavBar from './components/navigation/NavBar';
 import Logout from './pages/auth/logout/Logout';
-import UserProfile from './pages/users/user-profile/UserProfile';
+import UserProfile from './pages/users/UserProfile';
 
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { usersGetCurrentUserThunk } from './store/usersSlice/thunks';
 
-import './App.css';
-import SideBar from './components/sidebar/SideBar';
+import SideBar from './components/navigation/SideBar';
 import Channels from './pages/channels/Channels';
-import ChannelPage from './pages/channels/channel-page/ChannelPage';
+import ChannelPage from './pages/channels/ChannelPage';
 import VideoPage from './pages/videos/video-page/VideoPage';
 
 
@@ -30,7 +29,7 @@ function App() {
     <div className='background'>
       <NavBar user={user} />
       <SideBar user={user} />
-      {/* <div className='pages'> */}
+      <div className='pages'>
         <Routes>
           <Route path='/users' element={<Users />} />
           <Route path='/users/profile/:id' element={<UserProfile />} />
@@ -44,7 +43,7 @@ function App() {
           <Route path='/auth/login' element={<Login />} />
           <Route path='/auth/logout' element={<Logout />} />
         </Routes>
-      {/* </div> */}
+      </div>
     </div>
   );
 }

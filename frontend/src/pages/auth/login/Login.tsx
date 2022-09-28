@@ -1,11 +1,9 @@
 import { MouseEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import LoginForm from "../../../components/forms/auth/login/LoginForm";
+import LoginForm from "../../../components/forms/auth/LoginForm";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { authLoginThunk } from "../../../store/authSlice/thunks";
-
-import '../auth-page.css';
 
 
 interface LoginProps {
@@ -34,7 +32,7 @@ function Login(props: LoginProps) {
 
   return (
     <div className="auth-page">
-      <div className="auth-page-container">
+      <div className="auth-page__container">
         <h1>Login</h1>
         <LoginForm
           email={email}

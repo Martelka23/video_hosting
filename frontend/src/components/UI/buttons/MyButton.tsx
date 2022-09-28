@@ -1,6 +1,5 @@
 import { MouseEvent } from "react";
 
-import './my-button.css';
 
 interface MyButtonProps {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void,

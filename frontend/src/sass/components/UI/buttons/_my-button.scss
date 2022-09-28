@@ -1,0 +1,26 @@
+@use '../../../abstracts/variables' as var;
+
+.my-button {
+  margin: 0.2em;
+  padding: 0.5em 1em;
+  border-radius: 10px;
+  border: none;
+  background-color: var.$sky;
+  color: var.$white;
+  font-weight: bold;
+  height: 3em;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 2px solid var.$sky;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: var.$white;
+    color: var.$sky;
+    transform: translateY(-4px);
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+}

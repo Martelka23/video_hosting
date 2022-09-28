@@ -5,7 +5,6 @@ import MyButton from '../../../components/UI/buttons/MyButton';
 import { useAppDispatch } from '../../../hooks/redux';
 import { authLogoutThunk } from '../../../store/authSlice/thunks';
 
-import './logout.css';
 
 function Logout() {
   const [agree, setAgree] = useState(false);

@@ -1,5 +1,8 @@
+@use '../../abstracts/placeholders' as ph;
+@use '../../abstracts/variables' as var;
+
 .logout-container {
-  background-color: #282c34;
+  background-color: var.$charade;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

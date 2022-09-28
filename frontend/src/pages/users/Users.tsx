@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import User from "../../@types/models/user";
 import { UsersGetAllThunk } from "../../store/usersSlice/thunks";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-
-import './users-page.css';
 import MyButton from "../../components/UI/buttons/MyButton";
+
 
 function Users() {
   const dispatch = useAppDispatch();
@@ -34,6 +33,10 @@ function Users() {
   return (
     // <div className="users-page">
       <div className="users-page-container">
+        {Users}
+        {Users}
+        {Users}
+        {Users}
         {Users}
       </div>
     // </div>

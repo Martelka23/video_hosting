@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 import User from '../../@types/models/user';
-import './sidebar.css';
+import Chevron from '../UI/Chevron';
 
 interface SideBarProps {
   user: User | undefined
@@ -12,32 +12,29 @@ interface SideBarProps {
 function SideBar({ user }: SideBarProps) {
   return (
     <nav className='sidebar'>
-      <div className='sidebar-content'>
+      <div className='sidebar__content'>
         <Link to={'/'}>
-          <FontAwesomeIcon className='sidebar-content-img' icon={faHouse} />
+          <FontAwesomeIcon className='sidebar__content__img' icon={faHouse} />
           <span>Home</span>
         </Link>
         <Link to={'/users'}>
-          <FontAwesomeIcon className='sidebar-content-img' icon={faUsers} />
+          <FontAwesomeIcon className='sidebar__content__img' icon={faUsers} />
           <span>Users</span>
         </Link>
         <Link to={user ? `/users/profile/${user.id}` : '/auth/unauthorized'}>
-          <FontAwesomeIcon className='sidebar-content-img' icon={faHouseUser} />
+          <FontAwesomeIcon className='sidebar__content__img' icon={faHouseUser} />
           <span>My Profile</span>
         </Link>
         <Link to={'/channels'}>
-          <FontAwesomeIcon className='sidebar-content-img' icon={faTv} />
+          <FontAwesomeIcon className='sidebar__content__img' icon={faTv} />
           <span>Channels</span>
         </Link>
         <Link to={'/videos'}>
-          <FontAwesomeIcon className='sidebar-content-img' icon={faVideo} />
+          <FontAwesomeIcon className='sidebar__content__img' icon={faVideo} />
           <span>Videos</span>
         </Link>
       </div>
-      <div className='sidebar-chevron'>
-        <div className='sidebar-chevron-line1' />
-        <div className='sidebar-chevron-line2' />
-      </div>
+      <Chevron />
     </nav>
   );
 }

@@ -1,17 +1,18 @@
+@use '../../../abstracts/variables' as var;
+
 .my-input {
   outline: none;
-  margin: 5px 0;
-  padding: 8px;
+  padding: 0.5em;
   border-radius: 10px;
-  border: 2px solid #282c34;
+  border: 2px solid var.$charade;
   width: 95%;
-  height: 50px;
-  font-size: 16px;
+  height: 3em;
+  font-size: 1rem;
   transition: all 0.2s;
 }
 
 .my-input:focus {
   /* border: 2px solid #00c5fc; */
-  border-color: #00c5fc;
+  border-color: var.$sky;
   width: 100%;
 }

@@ -1,9 +1,8 @@
 import { ChangeEvent, MouseEvent } from "react";
-import MyButton from "../../../UI/buttons/MyButton";
-import MyInput from "../../../UI/inputs/MyInput";
+import MyButton from "../../UI/buttons/MyButton";
+import MyInput from "../../UI/inputs/MyInput";
 import { Link } from 'react-router-dom';
 
-import '../auth-form.css'
 
 interface RegistrationFormProps {
   username: string,
@@ -22,8 +21,8 @@ function RegistrationForm({
   submit
 }: RegistrationFormProps) {
   return (
-    <form className="auth-form" onSubmit={event => event.preventDefault()}>
-      <div className="auth-inputs">
+    <form className="auth__form" onSubmit={event => event.preventDefault()}>
+      <div className="auth__inputs">
         <MyInput
           value={username}
           placeholder="username"
@@ -40,9 +39,9 @@ function RegistrationForm({
           onChange={setPassword}
         />
       </div>
-      <div className="auth-buttons">
+      <div className="auth__buttons">
         <MyButton onClick={submit}>Sign up</MyButton>
-        <div className="auth-links">
+        <div className="auth__links">
           <Link to="/auth/login">
             <MyButton onClick={(_) => { }}>I have an account</MyButton>
           </Link>

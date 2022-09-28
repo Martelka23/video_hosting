@@ -1,0 +1,10 @@
+@forward './auth/auth-page';
+@forward './auth/logout';
+
+@forward './channels/channel-page';
+@forward './channels/channels';
+
+@forward './users/user-profile-page';
+@forward './users/users-page';
+
+@forward './videos/video-page';

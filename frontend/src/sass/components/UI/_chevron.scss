@@ -1,0 +1,26 @@
+@use '../../abstracts/variables' as var;
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  &__line1,
+  &__line2 {
+    height: 25px;
+    width: 3px;
+    background-color: var.$white;
+  }
+
+  &__line1 {
+    transform-origin: bottom right;
+    transition: all 0.6s;
+    transform: translateX(-8px) rotate(-45deg);
+  }
+
+  &__line2 {
+    transform-origin: top right;
+    transition: all 0.6s;
+    transform: translateX(-8px) rotate(45deg);
+  }
+}

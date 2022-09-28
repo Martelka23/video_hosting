@@ -7,7 +7,6 @@ import MyInput from '../UI/inputs/MyInput';
 import MyButton from '../UI/buttons/MyButton';
 import User from '../../@types/models/user';
 
-import './navbar.css';
 
 interface NavBarProps {
   user: User | undefined
@@ -54,23 +53,23 @@ function NavBar({ user }: NavBarProps) {
 
   return (
     <nav className='navbar'>
-      <div className='navbar-logo'>
+      <div className='navbar__logo'>
         <Link to='/users'>
-          <FontAwesomeIcon className='navbar-img' icon={faVideo} />
+          <FontAwesomeIcon className='navbar__img' icon={faVideo} />
         </Link>
       </div>
-      <div className='navbar-search'>
+      <div className='navbar__search'>
         <MyInput
           value={search}
           onChange={event => setSearch(event.target.value)}
           placeholder='Search'
         />
       </div>
-      <div className='navbar-right'>
-        <div className='navbar-user'>
+      <div className='navbar__right'>
+        <div className='navbar__user'>
           {UserElement}
         </div>
-        <div className='navbar-buttons'>
+        <div className='navbar__buttons'>
           {Buttons}
         </div>
       </div>

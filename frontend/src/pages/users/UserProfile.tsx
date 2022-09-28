@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { UsersGetByIdThunk } from '../../../store/usersSlice/thunks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { UsersGetByIdThunk } from '../../store/usersSlice/thunks';
 
-import './user-profile-page.css';
 
 interface UserProfileProps {
 

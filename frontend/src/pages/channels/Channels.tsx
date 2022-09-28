@@ -6,7 +6,6 @@ import MyButton from '../../components/UI/buttons/MyButton';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ChannelsGetAllThunk } from '../../store/channelsSlice/thunks';
 
-import './channels.css';
 
 function Channels() {
   const dispatch = useAppDispatch();

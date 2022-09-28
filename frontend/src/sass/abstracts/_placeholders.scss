@@ -1,12 +1,7 @@
-.auth-page h1 {
-  color: white;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
-}
+@use './variables' as var;
 
-.auth-page-container {
-  background-color: #282c34;
+%container {
+  background-color: var.$charade;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,4 +13,3 @@
   max-height: 500px;
   border-radius: 20px;
 }
-

@@ -1,0 +1,16 @@
+@use '../../abstracts/placeholders' as ph;
+@use '../../abstracts/variables' as var;
+
+.auth-page {
+  margin: auto 0;
+  h1 {
+    color: var.$white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
+  &__container {
+    @extend %container;
+  }
+}

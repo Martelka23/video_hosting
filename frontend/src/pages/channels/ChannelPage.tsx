@@ -3,12 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { faHeartCrack, faHeart, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Video } from '../../../@types/models/video';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { ChannelsGetByIdThunk } from '../../../store/channelsSlice/thunks';
-import { VideosGetThunk } from '../../../store/videoSlice/thunks';
+import { Video } from '../../@types/models/video';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { ChannelsGetByIdThunk } from '../../store/channelsSlice/thunks';
+import { VideosGetThunk } from '../../store/videoSlice/thunks';
 
-import './channel-page.css';
 
 function ChannelPage() {
   const { id } = useParams();
