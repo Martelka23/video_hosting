@@ -1,10 +1,11 @@
-import { DbObject } from "../@types/database";
-import { CreateVideoDb, FindVideoDb, Video } from "../@types/models/videos";
 import pool from "../db";
 import sqlGenerator from "./sqlGenerator";
+import { DbObject } from "../@types/database";
+import Video from "../@types/models/videos.model";
+import { CreateVideoDto, FindVideoDto } from "../@types/dto/video.dto";
 
 class VideosDal {
-  async find(conditions: FindVideoDb = {}): Promise<Video[]> {
+  async find(conditions: FindVideoDto = {}): Promise<Video[]> {
     const conditionsString = sqlGenerator.getConditionString(conditions);
     const result = await pool.query(`
       SELECT
@@ -18,7 +19,7 @@ class VideosDal {
     return videos;
   }
 
-  async create(createVideoDb: CreateVideoDb): Promise<Video> {
+  async create(createVideoDb: CreateVideoDto): Promise<Video> {
     const insertString = sqlGenerator.getInsertString(createVideoDb as unknown as DbObject);
     const result = await pool.query(`
       INSERT INTO

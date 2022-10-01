@@ -1,16 +1,11 @@
-interface Token {
+export default interface Token {
   id: number,
   refreshToken: string,
   userId: number,
   activationLink: string
 }
 
-interface JwtTokens {
+export interface JwtTokens {
   refreshToken: string,
   accessToken: string
-}
-
-export default Token;
-export {
-  JwtTokens
 }

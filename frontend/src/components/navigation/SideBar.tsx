@@ -2,7 +2,7 @@ import { faHouse, faUsers, faVideo, faHouseUser, faTv } from '@fortawesome/free-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
-import User from '../../@types/models/user';
+import User from '../../@types/models/user.model';
 import Chevron from '../UI/Chevron';
 
 interface SideBarProps {

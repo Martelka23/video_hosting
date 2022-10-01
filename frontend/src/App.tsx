@@ -1,20 +1,21 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Users from './pages/users/Users';
 import Login from './pages/auth/login/Login';
+import Channels from './pages/channels/Channels';
 import Signup from './pages/auth/signup/Signup';
-import NavBar from './components/navigation/NavBar';
 import Logout from './pages/auth/logout/Logout';
 import UserProfile from './pages/users/UserProfile';
+import ChannelPage from './pages/channels/ChannelPage';
+import VideoPage from './pages/videos/video-page/VideoPage';
 
-import { useEffect } from 'react';
+import NavBar from './components/navigation/NavBar';
+import SideBar from './components/navigation/SideBar';
+
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { usersGetCurrentUserThunk } from './store/usersSlice/thunks';
 
-import SideBar from './components/navigation/SideBar';
-import Channels from './pages/channels/Channels';
-import ChannelPage from './pages/channels/ChannelPage';
-import VideoPage from './pages/videos/video-page/VideoPage';
 
 
 function App() {

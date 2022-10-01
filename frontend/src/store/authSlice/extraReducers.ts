@@ -1,50 +1,47 @@
-import { ActionReducerMapBuilder, AnyAction, PayloadAction } from "@reduxjs/toolkit";
+import { ActionReducerMapBuilder, PayloadAction } from "@reduxjs/toolkit";
+
+import RequestError from "../../@types/axios/error";
+import { CreatedUserDb } from "../../@types/models/user.model";
+import { isError, isFulfilled, isPending } from "../store-tools/matchers";
 import { authLoginThunk, authLogoutThunk, authSignupThunk } from "./thunks";
 import { AuthState } from "./types";
 
-function isError(action: AnyAction) {
-  return action.type.endsWith('rejected');
-}
-
 export const authExtraReducers = (builder: ActionReducerMapBuilder<AuthState>): void => {
   builder
-    .addCase(authSignupThunk.pending, (state, action) => {
-      state.isLoading = true;
-      state.error = null;
-      console.log('signup pending')
-    })
-    .addCase(authSignupThunk.fulfilled, (state, action) => {
+    .addCase(authSignupThunk.fulfilled, (state, action: PayloadAction<CreatedUserDb>) => {
       state.user = action.payload.user;
       localStorage.setItem('accessToken', action.payload.tokens.accessToken);
-      state.isLoading = false;
-      console.log('result ', action.payload.tokens.accessToken)
+      console.log('result ', action.payload.tokens.accessToken);
       console.log(localStorage.getItem('accessToken'));
     })
 
-    .addCase(authLoginThunk.pending, (state, action) => {
-      state.isLoading = true;
-      state.error = null;
-    })
-    .addCase(authLoginThunk.fulfilled, (state, action) => {
+    .addCase(authLoginThunk.fulfilled, (state, action: PayloadAction<CreatedUserDb>) => {
       state.user = action.payload.user;
       console.log(action.payload.user);
-      console.log('result ', action.payload.tokens.accessToken)
+      console.log('result ', action.payload.tokens.accessToken);
       localStorage.setItem('accessToken', action.payload.tokens.accessToken);
+    })
+
+    .addCase(authLogoutThunk.fulfilled, (state) => {
+      console.log('Lougout fulfilled add case');
+      localStorage.removeItem('accessToken');
+      state.user = null;
+    })
+
+    .addMatcher(isPending('auth'), (state) => {
+      state.isLoading = true;
+      state.error = null;
+      console.log('Login pending from matcher');
+    })
+
+    .addMatcher(isFulfilled('auth'), (state) => {
+      console.log('Matcher fulfilled');
       state.isLoading = false;
     })
 
-    .addCase(authLogoutThunk.pending, (state, action) => {
-      state.isLoading = true;
-      state.error = null;
-    })
-    .addCase(authLogoutThunk.fulfilled, (state, action) => {
-      state.user = null;
-      localStorage.removeItem('accessToken');
-    })
-
-    .addMatcher(isError, (state, action: PayloadAction<string>) => {
+    .addMatcher(isError('auth'), (state, action: PayloadAction<RequestError>) => {
       state.error = action.payload;
-      console.log('error!', action.payload)
+      console.log('error!', action.payload);
       state.isLoading = false;
     })
 }

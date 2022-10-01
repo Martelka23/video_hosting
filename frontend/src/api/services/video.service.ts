@@ -1,15 +1,17 @@
 import { AxiosResponse } from "axios";
+
 import $api from "..";
-import { CreateVideoDb, FindVideoDb, Video } from "../../@types/models/video";
 import { objectToQueryString } from "../tools";
+import Video from "../../@types/models/video.model";
+import { CreateVideoDto, FindVideoDto } from "../../@types/dto/video.dto";
 
 
 class VideoService {
-  async find(conditions?: FindVideoDb): Promise<AxiosResponse<Video[]>> {
+  async find(conditions?: FindVideoDto): Promise<AxiosResponse<Video[]>> {
     return await $api.get(`/videos/video${objectToQueryString(conditions)}`);
   }
 
-  async create(createVideoDb: CreateVideoDb): Promise<AxiosResponse<Video>> {
+  async create(createVideoDb: CreateVideoDto): Promise<AxiosResponse<Video>> {
     return await $api.post('/videos/create', createVideoDb);
   }
 }

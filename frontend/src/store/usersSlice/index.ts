@@ -5,7 +5,9 @@ import { UsersState } from "./types";
 const initialState: UsersState = {
   users: [],
   userProfile: undefined,
-  currentUser: undefined
+  currentUser: undefined,
+  isLoading: false,
+  error: null
 }
 
 const usersSlice = createSlice({

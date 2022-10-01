@@ -1,15 +1,13 @@
 import { AxiosResponse } from "axios";
 
 import $api from "..";
-import User from "../../@types/models/user";
+import { FindUsersDto } from "../../@types/dto/user.dto";
+import User from "../../@types/models/user.model";
+import { objectToQueryString } from "../tools";
 
 class UserService {
-  async getAll(): Promise<AxiosResponse<User[]>> {
-    return await $api.get('/users/all');
-  }
-
-  async getById(id: number): Promise<AxiosResponse<User>> {
-    return await $api.get(`/users/profile/${id}`);
+  async find(conditions: FindUsersDto = {}): Promise<AxiosResponse<User[]>> {
+    return await $api.get(`/users/${objectToQueryString(conditions)}`);
   }
 
   async getCurrentUser(): Promise<AxiosResponse<User>> {

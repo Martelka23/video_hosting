@@ -1,13 +1,12 @@
 import pool from "../db";
 import sqlGenerator from './sqlGenerator';
-import User, { CreateUserDb, FindUsersDb, UpdateUserDb } from "../@types/models/user";
+import User, { CreateUserDb } from "../@types/models/user.model";
+import { FindUsersDto, UpdateUserDto } from "../@types/dto/user.dto";
 import { DbObject } from "../@types/database";
 
 class UserDal {
-  async find(conditions: FindUsersDb = {}): Promise<User[]> {
-    const conditionsString: string = sqlGenerator.getConditionString(conditions);
-    console.log(conditionsString);
-    
+  async find(conditions: FindUsersDto = {}): Promise<User[]> {
+    const conditionsString: string = sqlGenerator.getConditionString(conditions);    
     const result = await pool.query(`
       SELECT
         *
@@ -33,7 +32,7 @@ class UserDal {
     return user;
   }
 
-  async update(userId: number, updateUserDb: UpdateUserDb): Promise<User> {
+  async update(userId: number, updateUserDb: UpdateUserDto): Promise<User> {
     const setString = sqlGenerator.getSetString(updateUserDb);
     const result = await pool.query(`
       UPDATE

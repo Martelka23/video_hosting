@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Channel from '../../@types/models/channel';
+import Channel from '../../@types/models/channel.model';
 import MyButton from '../../components/UI/buttons/MyButton';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ChannelsGetAllThunk } from '../../store/channelsSlice/thunks';
@@ -13,7 +13,7 @@ function Channels() {
   const channels: Channel[] | null = useAppSelector(state => state.channelsReducer.channels);
 
   useEffect(() => {
-    dispatch(ChannelsGetAllThunk())
+    dispatch(ChannelsGetAllThunk({}))
   }, [dispatch]);
 
 

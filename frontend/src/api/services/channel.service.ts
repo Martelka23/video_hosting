@@ -1,18 +1,17 @@
 import { AxiosResponse } from "axios";
+
 import $api from "..";
-import Channel from "../../@types/models/channel";
+import { objectToQueryString } from "../tools";
+import Channel from "../../@types/models/channel.model";
+import { CreateChannelDto, FindChannelDto } from "../../@types/dto/channel.dto";
 
 class ChannelService {
-  async getAll(): Promise<AxiosResponse<Channel[]>> {
-    return await $api.get('/channels/all');
+  async find(conditions: FindChannelDto = {}): Promise<AxiosResponse<Channel[]>> {
+    return await $api.get(`/channels/${objectToQueryString(conditions)}`);
   }
 
-  async getById(id: number): Promise<AxiosResponse<Channel>> {
-    return await $api.get(`/channels/channel/${id}`);
-  }
-
-  async getByUserId(userId: number): Promise<AxiosResponse<Channel>> {
-    return await $api.get(`/channels/userChannel/${userId}`);
+  async create(createChannelDb: CreateChannelDto): Promise<AxiosResponse<Channel>> {
+    return await $api.post(`/channels/create`, createChannelDb);
   }
 }
 

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import MyInput from '../UI/inputs/MyInput';
 import MyButton from '../UI/buttons/MyButton';
-import User from '../../@types/models/user';
+import User from '../../@types/models/user.model';
 
 
 interface NavBarProps {

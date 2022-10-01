@@ -1,6 +1,6 @@
-import { JwtTokens } from "./token";
+import { JwtTokens } from "./token.model";
 
-interface User {
+export default interface User {
   id: number,
   username: string,
   email: string,
@@ -13,25 +13,19 @@ interface User {
   role: string
 }
 
-interface CreateUserDto {
+export interface CreateUserDb {
   username: string,
   email: string,
-  password: string
+  password: string,
+  createdAt: string
 }
 
-interface CreatedUserDb { 
+export interface CreatedUserDb { 
   user: User, 
   tokens: JwtTokens 
-}
+};
 
-interface LoginUserDto {
+export interface LoginUserDb {
   email: string,
   password: string
-}
-
-export default User;
-export {
-  CreateUserDto,
-  CreatedUserDb,
-  LoginUserDto
 }

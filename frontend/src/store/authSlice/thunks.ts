@@ -1,17 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import RequestError from "../../@types/axios/error";
-import { CreatedUserDb, CreateUserDto, LoginUserDto } from "../../@types/models/user";
+
 import authService from "../../api/services/auth.service";
+import RequestError from "../../@types/axios/error";
+import { CreatedUserDb } from "../../@types/models/user.model";
+import { CreateUserDto, LoginUserDto } from "../../@types/dto/user.dto";
+import { thunkErrorChecker } from "../store-tools/thunkErrorChecker";
 
 export const authSignupThunk = createAsyncThunk<CreatedUserDb, CreateUserDto, { rejectValue: RequestError }>(
   'auth/signup',
   async function (createUserDto, { rejectWithValue }): Promise<CreatedUserDb> {
     const response = await authService.signup(createUserDto);
-    if (response.status >= 300) {
-      rejectWithValue({ status: response.status, message: 'Auth error' });
-    }
 
-    return response.data;
+    return thunkErrorChecker(response, rejectWithValue, 'Auth error');
   }
 );
 
@@ -19,11 +19,8 @@ export const authLoginThunk = createAsyncThunk<CreatedUserDb, LoginUserDto, { re
   'auth/login',
   async function (loginUserDto, { rejectWithValue }): Promise<CreatedUserDb> {
     const response = await authService.login(loginUserDto);
-    if (response.status >= 300) {
-      rejectWithValue({ status: response.status, message: 'Login error' });
-    }
-
-    return response.data;
+    
+    return thunkErrorChecker(response, rejectWithValue, 'Login error');
   }
 );
 
@@ -31,10 +28,7 @@ export const authLogoutThunk = createAsyncThunk<string, undefined, { rejectValue
   'auth/logout',
   async function (_, { rejectWithValue }): Promise<string> {
     const response = await authService.logout();
-    if (response.status >= 300) {
-      rejectWithValue({ status: response.status, message: 'Logout error' });
-    }
-
-    return response.data;
+    
+    return thunkErrorChecker(response, rejectWithValue, 'Logout error');
   }
 );

@@ -1,46 +1,24 @@
 import { NextFunction, Request, Response } from "express";
+
 import userService from "../services/user.service";
-import User, { FindUsersDb } from "../@types/models/user";
+import User from "../@types/models/user.model";
+import { ControllerErrorHandler } from "./tools/controller-tools";
+
 
 class UserController {
-  async getCurrentUser(req: Request, res: Response, next: NextFunction) {
-    try {
-      const id: number = res.locals.tokenPayload.id;
-      const user = await userService.getOne({ id });
-      res.json(user);
-    } catch (err) {
-      next(err);
-    }
+  @ControllerErrorHandler()
+  async getCurrentUser(req: Request, res: Response, _: NextFunction) {
+    const id: number = res.locals.tokenPayload.id;
+    const users = await userService.find({ id });
+    const status = users.length ? 200 : 204;
+    res.status(status).json(users[0]);
   }
 
-  async getAll(req: Request, res: Response, next: NextFunction) {
-    try {
-      const users: User[] = await userService.getAll();
-      res.json(users);
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  async getOne(req: Request, res: Response, next: NextFunction) {
-    try {
-      const findUsersDb: FindUsersDb = req.body;
-      const user: User = await userService.getOne(findUsersDb);
-      res.json(user);
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  async getById(req: Request, res: Response, next: NextFunction) {
-    try {
-      const id: number = Number(req.params.id);
-      const findUsersDb: FindUsersDb = { id };
-      const user: User = await userService.getOne(findUsersDb);
-      res.json(user);
-    } catch (err) {
-      next(err);
-    }
+  @ControllerErrorHandler()
+  async find(req: Request, res: Response, _: NextFunction) {
+    const users: User[] = await userService.find(req.query);
+    const status = users.length ? 200 : 204;
+    res.status(status).json(users);
   }
 }
 

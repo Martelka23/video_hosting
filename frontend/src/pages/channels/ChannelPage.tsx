@@ -3,10 +3,10 @@ import { Link, useParams } from 'react-router-dom';
 import { faHeartCrack, faHeart, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Video } from '../../@types/models/video';
+import Video from '../../@types/models/video.model';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { ChannelsGetByIdThunk } from '../../store/channelsSlice/thunks';
 import { VideosGetThunk } from '../../store/videoSlice/thunks';
+import { ChannelsGetOneThunk } from '../../store/channelsSlice/thunks';
 
 
 function ChannelPage() {
@@ -18,7 +18,7 @@ function ChannelPage() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(ChannelsGetByIdThunk(Number(id)));
+    dispatch(ChannelsGetOneThunk({ id: Number(id) }));
   }, [id]);
 
   useEffect(() => {

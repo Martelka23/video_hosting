@@ -1,10 +1,11 @@
 import { DbObject } from "../@types/database";
-import Channel, { CreateChannelDb, FindChannelDb } from "../@types/models/channel";
+import { CreateChannelDto, FindChannelDto } from "../@types/dto/channel.dto";
+import Channel from "../@types/models/channel.model";
 import pool from "../db";
 import sqlGenerator from "./sqlGenerator";
 
 class ChannelDal {
-  async createChannel(createChannelDb: CreateChannelDb): Promise<Channel> {
+  async createChannel(createChannelDb: CreateChannelDto): Promise<Channel> {
     const insertString: string = sqlGenerator.getInsertString(createChannelDb as unknown as DbObject);
     const result = await pool.query(`
       INSERT INTO
@@ -17,7 +18,7 @@ class ChannelDal {
     return channel;
   }
 
-  async find(conditions?: FindChannelDb): Promise<Channel[]> {
+  async find(conditions?: FindChannelDto): Promise<Channel[]> {
     const conditionsString: string = sqlGenerator.getConditionString(conditions);
     const result = await pool.query(`
       SELECT

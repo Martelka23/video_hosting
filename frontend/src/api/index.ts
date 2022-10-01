@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import env from 'react-dotenv';
 
-import { JwtTokens } from "../@types/models/token";
+import { JwtTokens } from "../@types/models/token.model";
 
 const $api = axios.create({
   withCredentials: true,

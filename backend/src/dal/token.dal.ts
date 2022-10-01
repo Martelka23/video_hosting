@@ -1,6 +1,6 @@
 import pool from "../db";
 import { DbObject } from "../@types/database";
-import Token, { CreateTokenDb, FindTokenDb, UpdateTokenDb } from "../@types/models/token";
+import Token, { CreateTokenDb, FindTokenDb, UpdateTokenDb } from "../@types/models/token.model";
 import sqlGenerator from './sqlGenerator';
 
 class TokenDal {

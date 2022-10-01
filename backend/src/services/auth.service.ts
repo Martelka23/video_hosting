@@ -3,10 +3,10 @@ import bcrypt from 'bcrypt';
 
 import userDal from "../dal/user.dal";
 import tokenService from './token.service';
-import User, { LoginUserDb } from "../@types/models/user";
+import User, { LoginUserDb } from "../@types/models/user.model";
 import { CreateUserDto } from "../@types/dto/user.dto";
-import { CreatedUserDb, CreateUserDb } from "../@types/models/user";
-import Token, { CreateTokenDb, JwtTokens, TokenPayload } from '../@types/models/token';
+import { CreatedUserDb, CreateUserDb } from "../@types/models/user.model";
+import Token, { CreateTokenDb, JwtTokens, TokenPayload } from '../@types/models/token.model';
 import emailService from './email.service';
 import ApiError from '../exceptions/api-error';
 import tokenDal from '../dal/token.dal';

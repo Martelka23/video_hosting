@@ -1,31 +1,41 @@
-import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import { UsersGetAllThunk, UsersGetByIdThunk, usersGetCurrentUserThunk } from "./thunks";
+import { ActionReducerMapBuilder, PayloadAction } from "@reduxjs/toolkit";
 
+import { isError, isFulfilled, isPending } from "../store-tools/matchers";
+import { UsersGetAllThunk, UsersGetUserProfileThunk, usersGetCurrentUserThunk } from "./thunks";
 import { UsersState } from "./types";
+import User from "../../@types/models/user.model";
+import RequestError from "../../@types/axios/error";
 
 export const usersExtraReducer = (builder: ActionReducerMapBuilder<UsersState>) => {
   builder
-    .addCase(UsersGetAllThunk.pending, (state, action) => {
-      console.log('users pending');
-    })
-    .addCase(UsersGetAllThunk.fulfilled, (state, action) => {
+    .addCase(UsersGetAllThunk.fulfilled, (state, action: PayloadAction<User[]>) => {
       console.log('users fulfilled');
       state.users = action.payload;
     })
     
-    .addCase(UsersGetByIdThunk.pending, (state, action) => {
-      console.log('pending user');
-    })
-    .addCase(UsersGetByIdThunk.fulfilled, (state, action) => {
+    .addCase(UsersGetUserProfileThunk.fulfilled, (state, action: PayloadAction<User>) => {
       console.log('user fulfiled');
       state.userProfile = action.payload;
     })
 
-    .addCase(usersGetCurrentUserThunk.pending, (state, action) => {
-      console.log('pending current user');
-    })
-    .addCase(usersGetCurrentUserThunk.fulfilled, (state, action) => {
+    .addCase(usersGetCurrentUserThunk.fulfilled, (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
       console.log('fullfiled current user');
+    })
+
+    .addMatcher(isPending('users'), (state) => {
+      state.isLoading = true;
+      state.error = null;
+      console.log('Login pending from matcher');
+    })
+
+    .addMatcher(isFulfilled('users'), (state) => {
+      state.isLoading = false;
+    })
+
+    .addMatcher(isError('users'), (state, action: PayloadAction<RequestError>) => {
+      state.error = action.payload;
+      console.log('error!', action.payload);
+      state.isLoading = false;
     })
 };

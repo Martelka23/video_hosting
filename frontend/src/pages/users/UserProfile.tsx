@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { UsersGetByIdThunk } from '../../store/usersSlice/thunks';
+import { UsersGetUserProfileThunk } from '../../store/usersSlice/thunks';
 
 
 interface UserProfileProps {
@@ -15,7 +15,7 @@ function UserProfile(props: UserProfileProps) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(UsersGetByIdThunk(Number(id)));
+    dispatch(UsersGetUserProfileThunk(Number(id)));
   }, [id]);
 
   if (!user) {

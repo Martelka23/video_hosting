@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 
-import Token, { TokenPayload, JwtTokens, CreateTokenDb, UpdateTokenDb, FindTokenDb } from "../@types/models/token";
+import Token, { TokenPayload, JwtTokens, CreateTokenDb, UpdateTokenDb, FindTokenDb } from "../@types/models/token.model";
 import tokenDal from '../dal/token.dal';
-import User from '../@types/models/user';
+import User from '../@types/models/user.model';
 import userDal from '../dal/user.dal';
 
 config({path: './.env'});

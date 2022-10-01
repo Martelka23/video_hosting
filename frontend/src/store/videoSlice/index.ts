@@ -4,7 +4,9 @@ import { VideoState } from "./types";
 
 const initialState: VideoState = {
   currentVideo: null,
-  videos: null
+  videos: null,
+  isLoading: false,
+  error: null
 };
 
 const videosSlice = createSlice({

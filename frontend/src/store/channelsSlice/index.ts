@@ -4,7 +4,9 @@ import { ChannelsState } from "./types";
 
 const initialState: ChannelsState = {
   channels: null,
-  channel: null
+  channel: null,
+  isLoading: false,
+  error: null
 };
 
 const channelsSlice = createSlice({

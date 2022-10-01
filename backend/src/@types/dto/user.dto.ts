@@ -14,3 +14,26 @@ export interface UserProfileDto {
   createdAt: Date,
   isActivated: boolean
 }
+
+export interface FindUsersDto {
+  id?: number,
+  username?: string,
+  email?: string,
+  password?: string,
+  banned?: boolean,
+  banReason?: string,
+  createdAt?: Date,
+  isActivated?: boolean,
+  role?: string
+}
+
+export interface UpdateUserDto {
+  username?: string,
+  email?: string,
+  password?: string,
+  img?: string,
+  banned?: boolean,
+  banReason?: string,
+  isActivated?: boolean,
+  role?: string
+}

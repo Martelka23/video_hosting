@@ -1,8 +1,9 @@
 import { AxiosResponse } from "axios";
 
 import $api from "..";
-import { JwtTokens } from "../../@types/models/token";
-import { CreatedUserDb, CreateUserDto, LoginUserDto } from "../../@types/models/user";
+import { JwtTokens } from "../../@types/models/token.model";
+import { CreatedUserDb } from "../../@types/models/user.model";
+import { CreateUserDto, LoginUserDto } from "../../@types/dto/user.dto";
 
 class AuthService {
   async signup(createUserDto: CreateUserDto): Promise<AxiosResponse<CreatedUserDb>> {

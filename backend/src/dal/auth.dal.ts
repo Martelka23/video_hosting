@@ -1,6 +1,6 @@
 import pool from "../db";
 import sqlGenerator from './sqlGenerator';
-import User from "../@types/models/user";
+import User from "../@types/models/user.model";
 
 
 class AuthDal {

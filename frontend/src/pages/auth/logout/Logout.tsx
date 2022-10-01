@@ -1,8 +1,8 @@
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import MyButton from '../../../components/UI/buttons/MyButton';
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { authLogoutThunk } from '../../../store/authSlice/thunks';
 
 
@@ -11,8 +11,8 @@ function Logout() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const logout = (event: MouseEvent<HTMLButtonElement>) => {
-    dispatch(authLogoutThunk());
+  const logout = async (event: MouseEvent<HTMLButtonElement>) => {
+    await dispatch(authLogoutThunk());
     setAgree(true);
     navigate('/users');
     navigate(0);

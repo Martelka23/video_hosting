@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { TokenPayload } from "../@types/models/token";
+
+import { TokenPayload } from "../@types/models/token.model";
 import ApiError from "../exceptions/api-error";
 
 function isBanned(req: Request, res: Response, next: NextFunction) {

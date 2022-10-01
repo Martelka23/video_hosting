@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 
-import User from "../../@types/models/user";
+import User from "../../@types/models/user.model";
 import { UsersGetAllThunk } from "../../store/usersSlice/thunks";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import MyButton from "../../components/UI/buttons/MyButton";
