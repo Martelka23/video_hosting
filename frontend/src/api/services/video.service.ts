@@ -8,7 +8,7 @@ import { CreateVideoDto, FindVideoDto } from "../../@types/dto/video.dto";
 
 class VideoService {
   async find(conditions?: FindVideoDto): Promise<AxiosResponse<Video[]>> {
-    return await $api.get(`/videos/video${objectToQueryString(conditions)}`);
+    return await $api.get(`/videos/${objectToQueryString(conditions)}`);
   }
 
   async create(createVideoDb: CreateVideoDto): Promise<AxiosResponse<Video>> {

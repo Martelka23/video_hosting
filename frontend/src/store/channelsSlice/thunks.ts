@@ -19,6 +19,6 @@ export const ChannelsGetOneThunk = createAsyncThunk<Channel, FindChannelDto, { r
   async function (conditions, { rejectWithValue }): Promise<Channel> {
     const response = await channelService.find(conditions);
 
-    return thunkErrorChecker(response, rejectWithValue, 'Channels get one error');
+    return thunkErrorChecker(response, rejectWithValue, 'Channels get one error')[0];
   }
 );

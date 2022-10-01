@@ -19,7 +19,7 @@ export const UsersGetUserProfileThunk = createAsyncThunk<User, number, { rejectV
   async function (id, { rejectWithValue }): Promise<User> {
     const response = await userService.find({ id });
     
-    return thunkErrorChecker(response, rejectWithValue, 'Get users error');
+    return thunkErrorChecker(response, rejectWithValue, 'Get users error')[0];
   }
 );
 

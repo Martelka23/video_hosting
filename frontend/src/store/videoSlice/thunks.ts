@@ -20,7 +20,7 @@ export const VideosGetCurrentThunk = createAsyncThunk<Video, FindVideoDto | unde
   async function (conditions, { rejectWithValue }): Promise<Video> {
     const response = await videoService.find(conditions);
     
-    return thunkErrorChecker(response, rejectWithValue, 'Find video error');
+    return thunkErrorChecker(response, rejectWithValue, 'Find video error')[0];
   }
 );
 
@@ -29,6 +29,6 @@ export const VideosCreateThunk = createAsyncThunk<Video, CreateVideoDto, { rejec
   async function (createVideoDb, { rejectWithValue }): Promise<Video> {
     const response = await videoService.create(createVideoDb);
     
-    return thunkErrorChecker(response, rejectWithValue, 'Create video error');
+    return thunkErrorChecker(response, rejectWithValue, 'Create video error')[0];
   }
 );
