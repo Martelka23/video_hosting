@@ -26,16 +26,16 @@ $api.interceptors.response.use(
     }
 
     if (error.response?.status === 401 && !originalRequest.headers._isRetry) {
-      console.log('refresh');
+      // console.log('refresh');
       originalRequest.headers._isRetry = true;
       try {
-        const jwtTokens = await axios.get<JwtTokens>('http://localhost:3005/api/auth/refresh', { withCredentials: true });
-        localStorage.setItem('accessToken', jwtTokens.data.accessToken);
+        const response = await axios.get<JwtTokens>('http://localhost:3005/api/auth/refresh', { withCredentials: true,  });
+        localStorage.setItem('accessToken', response.data.accessToken);
         return $api.request(originalRequest);
       } catch (err) {
-        console.log('Unauthorized');
-        if (err instanceof Error)
-          console.log(err.message);
+        if (err instanceof AxiosError && err.response?.status === 429) {
+          return $api.request(originalRequest);
+        }
       }
     }
     throw error;

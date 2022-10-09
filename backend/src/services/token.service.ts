@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 
-import Token, { TokenPayload, JwtTokens, CreateTokenDb, UpdateTokenDb, FindTokenDb } from "../@types/models/token.model";
+import Token, { TokenPayload, JwtTokens, CreateTokenDb, UpdateTokenDb, FindTokenDb, TokenDecoded } from "../@types/models/token.model";
 import tokenDal from '../dal/token.dal';
 import User from '../@types/models/user.model';
 import userDal from '../dal/user.dal';
@@ -16,11 +16,11 @@ class TokenService {
     return { refreshToken, accessToken };
   }
 
-  validateRefreshToken(refreshToken: string): TokenPayload | null {
-    let userData: TokenPayload | null = null;
+  validateRefreshToken(refreshToken: string): TokenDecoded | null {
+    let userData: TokenDecoded | null = null;
 
     try {
-      userData = jwt.verify(refreshToken, process.env.JWT_REF_SEC as string) as TokenPayload;
+      userData = jwt.verify(refreshToken, process.env.JWT_REF_SEC as string) as unknown as TokenDecoded;
     } catch (err) { }
 
     return userData;
@@ -62,6 +62,10 @@ class TokenService {
     const users: User[] = await userDal.find({ id: token.userId });
 
     return users[0];
+  }
+
+  async removeToken(refreshToken: string): Promise<void> {
+    await tokenDal.removeToken(refreshToken);
   }
 }
 

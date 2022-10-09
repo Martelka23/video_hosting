@@ -13,6 +13,16 @@ export interface TokenPayload {
   role: string
 }
 
+export interface TokenDecoded {
+  id: number,
+  email: string,
+  isBanned: boolean,
+  isActivated: boolean,
+  role: string,
+  iat: Date,
+  exp: Date
+}
+
 export interface JwtTokens {
   refreshToken: string,
   accessToken: string

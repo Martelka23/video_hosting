@@ -19,6 +19,10 @@ class ApiError extends Error {
   static Forbidden(message: string = 'Forbidden') {
     return new ApiError(403, message);
   }
+
+  static TooManyRequests(message: string = 'Too many requests') {
+    return new ApiError(429, message);
+  }
 }
 
 export default ApiError;

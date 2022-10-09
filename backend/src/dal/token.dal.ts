@@ -6,13 +6,6 @@ import sqlGenerator from './sqlGenerator';
 class TokenDal {
   async find(conditions: FindTokenDb): Promise<Token> {
     const conditionsString: string = sqlGenerator.getConditionString(conditions);
-    console.log(`
-      SELECT
-        *
-      FROM
-        tokens
-      ${conditionsString}
-    `); 
     const result = await pool.query(`
       SELECT
         *
@@ -56,8 +49,10 @@ class TokenDal {
 
   async removeToken(refreshToken: string) {
     await pool.query(`
-      DELETE FROM
+      UPDATE
         tokens
+      SET
+        refresh_token = ''
       WHERE
         refresh_token = '${refreshToken}'
     `);

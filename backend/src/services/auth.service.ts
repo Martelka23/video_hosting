@@ -6,7 +6,7 @@ import tokenService from './token.service';
 import User, { LoginUserDb } from "../@types/models/user.model";
 import { CreateUserDto } from "../@types/dto/user.dto";
 import { CreatedUserDb, CreateUserDb } from "../@types/models/user.model";
-import Token, { CreateTokenDb, JwtTokens, TokenPayload } from '../@types/models/token.model';
+import Token, { CreateTokenDb, JwtTokens, TokenDecoded, TokenPayload } from '../@types/models/token.model';
 import emailService from './email.service';
 import ApiError from '../exceptions/api-error';
 import tokenDal from '../dal/token.dal';
@@ -74,17 +74,22 @@ class AuthService {
 
   async refresh(refreshToken: string): Promise<CreatedUserDb> {
     if (!refreshToken) {
-      console.log(refreshToken);
       throw ApiError.UnauthorizedError();
     }
 
-    const userData: TokenPayload | null = tokenService.validateRefreshToken(refreshToken);
-    const token: Token = await tokenService.find({ refreshToken });
+    const userData: TokenDecoded | null = tokenService.validateRefreshToken(refreshToken);
+    const token: Token | null = userData ? await tokenService.find({ userId: userData.id }) : null;
+    const tokenData: TokenDecoded | null = token ? tokenService.validateRefreshToken(token.refreshToken) : null;
 
-    if (!userData || !token) {
-      console.log(userData)
-      console.log(token)
+    if (!userData || !tokenData) {
       throw ApiError.UnauthorizedError();
+    }
+
+    console.log(new Date().valueOf());
+    console.log(tokenData.iat.valueOf() * 1000);
+
+    if (new Date().valueOf() - tokenData.iat.valueOf() * 1000 < 10000) {
+      throw ApiError.TooManyRequests();
     }
 
     const users: User[] = await userDal.find({ id: userData.id });
