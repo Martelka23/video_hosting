@@ -7,5 +7,5 @@ export default interface Video {
   likes: number,
   dislikes: number,
   views: number,
-  channel_id: number
+  channelId: number
 }

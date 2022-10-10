@@ -1,0 +1,27 @@
+@use '../../abstracts/variables' as var;
+
+.video {
+  .video-js {
+    $br: 5px;
+    width: 120em;
+    border-radius: $br;
+    
+    .vjs-tech {
+      border-radius: $br;
+    }
+
+    .vjs-control-bar {
+      border-radius: $br;
+      color: var.$sky;
+      background-color: rgba(43, 51, 63, 0.97);
+    }
+  }
+
+  &__title {
+    margin: 1em 0 0.7em 0;
+  }
+
+  hr {
+    margin: 1.5em 0;
+  }
+}

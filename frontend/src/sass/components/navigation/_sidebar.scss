@@ -10,6 +10,7 @@ $hover-width: 22em;
   width: 5.5em;
   background-color: var.$dark;
   transition: width 0.3s;
+  z-index: 1000;
 
   &:hover {
     width: $hover-width;

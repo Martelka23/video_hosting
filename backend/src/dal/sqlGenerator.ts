@@ -6,7 +6,7 @@ class SqlGenerator {
     return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
   }
 
-  camelcaseKeys(object: {}[] | {}): {}[] | {} {
+  camelcaseKeys(object: any): any {
     return camelcaseKeys(object);
   }
 

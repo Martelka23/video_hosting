@@ -13,3 +13,14 @@ export interface FindVideoDto {
   filepath?: string,
   channel_id?: number
 }
+
+export interface VideoStatDto {
+  videoId: number,
+  actionType: "likes" | "dislikes" | "views",
+  value: -1 | 1
+}
+
+export interface CheckAntiDuplicateDto {
+  videoId: number,
+  userId: number
+}

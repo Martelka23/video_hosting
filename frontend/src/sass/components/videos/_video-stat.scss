@@ -1,0 +1,16 @@
+@use '../../abstracts/variables' as var;
+
+.video-stat {
+  span {
+    margin-right: 0.5em;
+    padding: 0.5em 1.5em 0.5em 0;
+    cursor: pointer;
+  }
+  .icon {
+    margin-right: 0.5em;
+  }
+
+  .selected {
+    color: var.$sky;
+  }
+}

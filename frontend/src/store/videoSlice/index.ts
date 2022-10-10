@@ -6,7 +6,8 @@ const initialState: VideoState = {
   currentVideo: null,
   videos: null,
   isLoading: false,
-  error: null
+  error: null,
+  selectedRate: null
 };
 
 const videosSlice = createSlice({

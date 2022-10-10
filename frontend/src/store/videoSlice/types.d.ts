@@ -4,5 +4,6 @@ export interface VideoState {
   videos: Video[] | null,
   currentVideo: Video | null,
   isLoading: boolean,
-  error: RequestError | null
+  error: RequestError | null,
+  selectedRate: "like" | "dislike" | null
 }
