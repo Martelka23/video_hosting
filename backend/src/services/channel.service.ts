@@ -1,5 +1,5 @@
-import { CreateChannelDto, FindChannelDto } from "../@types/dto/channel.dto";
-import Channel from "../@types/models/channel.model";
+import { FindChannelDto } from "../@types/dto/channel.dto";
+import Channel, { CreateChannelDb } from "../@types/models/channel.model";
 import channelDal from "../dal/channel.dal";
 
 class ChannelService {
@@ -9,7 +9,7 @@ class ChannelService {
     return channels;
   }
 
-  async create(createChannelDb: CreateChannelDto): Promise<Channel> {
+  async create(createChannelDb: CreateChannelDb): Promise<Channel> {
     const channel: Channel = await channelDal.createChannel(createChannelDb);
 
     return channel;

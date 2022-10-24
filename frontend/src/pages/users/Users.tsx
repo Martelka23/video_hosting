@@ -34,10 +34,6 @@ function Users() {
     // <div className="users-page">
       <div className="users-page-container">
         {Users}
-        {Users}
-        {Users}
-        {Users}
-        {Users}
       </div>
     // </div>
   );

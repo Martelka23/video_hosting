@@ -1,7 +1,6 @@
 export interface CreateChannelDto {
   name: string,
-  description: string,
-  userId: number
+  description: string
 }
 
 export interface FindChannelDto {

@@ -1,11 +1,11 @@
 import { DbObject } from "../@types/database";
-import { CreateChannelDto, FindChannelDto } from "../@types/dto/channel.dto";
-import Channel from "../@types/models/channel.model";
+import { FindChannelDto } from "../@types/dto/channel.dto";
+import Channel, { CreateChannelDb } from "../@types/models/channel.model";
 import pool from "../db";
 import sqlGenerator from "./sqlGenerator";
 
 class ChannelDal {
-  async createChannel(createChannelDb: CreateChannelDto): Promise<Channel> {
+  async createChannel(createChannelDb: CreateChannelDb): Promise<Channel> {
     const insertString: string = sqlGenerator.getInsertString(createChannelDb as unknown as DbObject);
     const result = await pool.query(`
       INSERT INTO

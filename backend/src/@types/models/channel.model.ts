@@ -6,3 +6,9 @@ export default interface Channel {
   subscribers: number,
   userId: number
 }
+
+export interface CreateChannelDb {
+  name: string,
+  description: string,
+  userId: number
+}

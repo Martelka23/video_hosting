@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import RequestError from "../../@types/axios/error";
-import { FindChannelDto } from "../../@types/dto/channel.dto";
+import { CreateChannelDto, FindChannelDto } from "../../@types/dto/channel.dto";
 import Channel from "../../@types/models/channel.model";
 import channelService from "../../api/services/channel.service";
 import { thunkErrorChecker } from "../store-tools/thunkErrorChecker";
@@ -18,6 +18,15 @@ export const ChannelsGetOneThunk = createAsyncThunk<Channel, FindChannelDto, { r
   'channels/getById',
   async function (conditions, { rejectWithValue }): Promise<Channel> {
     const response = await channelService.find(conditions);
+
+    return thunkErrorChecker(response, rejectWithValue, 'Channels get one error')[0];
+  }
+);
+
+export const ChannelsCreateThunk = createAsyncThunk<Channel, CreateChannelDto, { rejectValue: RequestError }>(
+  'channels/create',
+  async function (createChannelDto, { rejectWithValue }): Promise<Channel> {
+    const response = await channelService.create(createChannelDto);
 
     return thunkErrorChecker(response, rejectWithValue, 'Channels get one error')[0];
   }
