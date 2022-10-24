@@ -4,13 +4,15 @@ import authReducer from "./authSlice";
 import usersReducer from "./usersSlice";
 import videoReducer from "./videoSlice";
 import channelsReducer from "./channelsSlice";
+import commentsReducer from "./commentsSlice";
 
 
 const mainReducer = combineReducers({
   authReducer,
   usersReducer,
   videoReducer,
-  channelsReducer
+  channelsReducer,
+  commentsReducer
 });
 
 const store = configureStore({

@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import videojs from 'video.js';
 import Video from '../../../@types/models/video.model';
+import VideoComments from '../../../components/comment/VideoComments';
 
 import VideoPlayer from '../../../components/video/Video';
-import VideoStat from '../../../components/videos/VideoStat';
+import VideoStat from '../../../components/video/VideoStat';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { VideosGetCurrentThunk, VideosUpdateStatThunk } from '../../../store/videoSlice/thunks';
 
@@ -16,7 +17,9 @@ function VideoPage() {
 
   useEffect(() => {
     dispatch(VideosGetCurrentThunk({ id: Number(id) }));
-    dispatch(VideosUpdateStatThunk({ actionType: 'views', videoId: Number(id), value: 1 }));
+    setTimeout(() => {
+      dispatch(VideosUpdateStatThunk({ actionType: 'views', videoId: Number(id), value: 1 }));
+    }, 10000);
   }, [id]);
 
   const videoJsOptions: videojs.PlayerOptions = {
@@ -37,6 +40,8 @@ function VideoPage() {
             <VideoStat video={video} />
             <hr />
             <p className='video__description'>{video.description}</p>
+            <hr />
+            <VideoComments videoId={Number(id)} />
           </React.Fragment>
           : <div>Loading</div>
       }

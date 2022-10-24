@@ -85,8 +85,8 @@ class AuthService {
       throw ApiError.UnauthorizedError();
     }
 
-    console.log(new Date().valueOf());
-    console.log(tokenData.iat.valueOf() * 1000);
+    // console.log(new Date().valueOf());
+    // console.log(tokenData.iat.valueOf() * 1000);
 
     if (new Date().valueOf() - tokenData.iat.valueOf() * 1000 < 10000) {
       throw ApiError.TooManyRequests();

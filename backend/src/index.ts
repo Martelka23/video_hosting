@@ -8,6 +8,7 @@ import errorMiddleware from './middlewares/error.middleware';
 import usersRouter from './routes/users.router';
 import channelsRouter from './routes/channels.router';
 import videosRouter from './routes/videos.router';
+import commentsRouter from './routes/comments.router';
 
 config({ path: './.env' });
 
@@ -26,6 +27,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/channels', channelsRouter);
 app.use('/api/videos', videosRouter);
+app.use('/api/comments', commentsRouter);
 
 app.use('/api/images', express.static('content'));
 

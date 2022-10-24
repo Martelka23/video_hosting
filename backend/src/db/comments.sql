@@ -3,7 +3,7 @@ create table comments (
   text text not null,
   likes integer default 0,
   dislikes integer default 0,
-  video_id integer default 0,
+  video_id integer not null,
   user_id integer not null,
   foreign key (video_id) references videos (id),
   foreign key (user_id) references users (id)

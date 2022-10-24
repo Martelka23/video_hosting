@@ -7,5 +7,6 @@ create table users (
   is_banned boolean default false,
   ban_reason varchar(255) default '',
   is_activated boolean default false,
-  role varchar(64) default 'user'
+  role varchar(64) default 'user',
+  img varchar(255) default 'user_images/default_image.jpg'
 );
