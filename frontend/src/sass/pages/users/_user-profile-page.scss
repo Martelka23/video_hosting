@@ -1,43 +1,41 @@
-.user-profile-page {
+@use '../../abstracts/variables' as var;
+
+.user-profile {
   background-color: #282c34;
   display: flex;
   flex-direction: column;
-  padding: 60px;
-  width: 70%;
-  height: 90%;
-  /* min-width: 150px;
-  min-height: 1200px; */
-  margin-top: 5%;
+  padding: 4em;
+  width: 90%;
   border-radius: 20px;
-}
 
-.user-profile-head {
-  display: flex;
-  /* border: 2px solid blue; */
-}
+  &__head {
+    display: flex;
+  }
 
-.user-profile-img {
-  /* border: 2px solid red; */
-}
+  &__img img {
+    width: 15em;
+    height: 15em;
+    object-fit: cover;
+    border-radius: 15px;
+  }
 
-.user-profile-img img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 15px;
-}
+  &__info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3em;
 
-.user-profile-info {
-  display: flex;
-  flex-direction: column;
-  margin-left: 40px;
-}
+    span {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+  }
 
-.user-profile-info span {
-  margin: 10px 0;
-  font-size: 20px;
-}
+  #user-profile__username {
+    font-size: 2rem;
+    font-weight: bold;
+  }
 
-#user-profile-username {
-  font-size: 50px;
+  hr {
+    margin: 2em 0 2em 0;
+  }
 }

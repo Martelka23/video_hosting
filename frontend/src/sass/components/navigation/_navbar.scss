@@ -36,6 +36,7 @@
   &__right {
     display: flex;
     justify-content: space-between;
+    height: 100%;
   }
 
   &__user {
@@ -44,6 +45,16 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: var.$white;
+    height: 100%;
+
+    .user {
+      height: 100%;
+     
+      &__info {
+        padding: 0 1em 0 1em;
+        height: 100%;
+      }
+    }
   }
 
   &__user img {

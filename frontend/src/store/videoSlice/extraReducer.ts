@@ -8,6 +8,11 @@ import Video from "../../@types/models/video.model";
 
 export const videoExtraReducer = (builder: ActionReducerMapBuilder<VideoState>): void => {
   builder
+    .addCase(VideosGetThunk.pending, (state) => {
+      console.log('videos get')
+      state.videos = null
+    })
+    
     .addCase(VideosGetThunk.fulfilled, (state, action: PayloadAction<Video[]>) => {
       console.log('videos fulfilled');
       state.videos = action.payload;
@@ -29,8 +34,8 @@ export const videoExtraReducer = (builder: ActionReducerMapBuilder<VideoState>):
 
     .addMatcher(isPending('videos'), (state) => {
       state.isLoading = true;
+      console.log('video pending from matcher')
       state.error = null;
-      console.log('Login pending from matcher');
     })
 
     .addMatcher(isFulfilled('videos'), (state) => {

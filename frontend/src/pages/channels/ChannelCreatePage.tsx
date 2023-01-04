@@ -1,3 +1,4 @@
+import { CreateChannelDto } from '../../@types/dto/channel.dto';
 import ChannelCreateForm from '../../components/forms/channels/ChannelCreateForm';
 import { useAppDispatch } from '../../hooks/redux';
 import { ChannelsCreateThunk } from '../../store/channelsSlice/thunks';
@@ -5,8 +6,8 @@ import { ChannelsCreateThunk } from '../../store/channelsSlice/thunks';
 function ChannelCreatePage() {
   const dispatch = useAppDispatch();
 
-  const onSubmit = async (name: string, description: string) => {
-    await dispatch(ChannelsCreateThunk({ name, description }))
+  const onSubmit = async (createChannelDto: CreateChannelDto) => {
+    await dispatch(ChannelsCreateThunk(createChannelDto))
   }
 
   return (

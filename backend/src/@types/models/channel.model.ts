@@ -10,5 +10,6 @@ export default interface Channel {
 export interface CreateChannelDb {
   name: string,
   description: string,
-  userId: number
+  userId: number,
+  img: string
 }

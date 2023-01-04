@@ -1,19 +1,18 @@
 import { v4 } from 'uuid';
 import bcrypt from 'bcrypt';
 
-import userDal from "../dal/user.dal";
 import tokenService from './token.service';
 import User, { LoginUserDb } from "../@types/models/user.model";
 import { CreateUserDto } from "../@types/dto/user.dto";
 import { CreatedUserDb, CreateUserDb } from "../@types/models/user.model";
 import Token, { CreateTokenDb, JwtTokens, TokenDecoded, TokenPayload } from '../@types/models/token.model';
-import emailService from './email.service';
 import ApiError from '../exceptions/api-error';
 import tokenDal from '../dal/token.dal';
+import userService from './user.service';
 
 class AuthService {
   async signup(createUserDto: CreateUserDto): Promise<CreatedUserDb> {
-    const candidate: User[] = await userDal.find({ email: createUserDto.email });
+    const candidate: User[] = await userService.find({ email: createUserDto.email });
     if (candidate[0]) {
       throw ApiError.BadRequest('Email already used');
     }
@@ -27,7 +26,7 @@ class AuthService {
     const activationLink: string = v4();
     // await emailService.sendActivationMail(createUserDb.email, `${process.env.API_URL}/api/auth/activate/${activationLink}`);
 
-    const newUser: User = await userDal.create(createUserDb);
+    const newUser: User = await userService.create(createUserDb);
 
     const tokenPayload: TokenPayload = {
       id: newUser.id,
@@ -48,10 +47,14 @@ class AuthService {
   }
 
   async login(loginUser: LoginUserDb): Promise<CreatedUserDb> {
-    const result: User[] = await userDal.find({ email: loginUser.email });
+    const result: User[] = await userService.find({ email: loginUser.email }, true);
     const candidate: User = result[0];
     if (!candidate) {
       throw ApiError.BadRequest('Wrong email');
+    }
+
+    if (!candidate.password) {
+      throw ApiError.BadRequest();
     }
 
     const isPasswordValid: boolean = await bcrypt.compare(loginUser.password, candidate.password);
@@ -92,7 +95,7 @@ class AuthService {
       throw ApiError.TooManyRequests();
     }
 
-    const users: User[] = await userDal.find({ id: userData.id });
+    const users: User[] = await userService.find({ id: userData.id });
     const user: User = users[0];
     const tokenPayload: TokenPayload = {
       id: user.id,
@@ -114,7 +117,7 @@ class AuthService {
       throw ApiError.BadRequest('Wrong activation link');
     }
 
-    const user: User = await userDal.update(candidate.id, { isActivated: true });
+    const user: User = await userService.update(candidate.id, { isActivated: true });
 
     return user;
   }

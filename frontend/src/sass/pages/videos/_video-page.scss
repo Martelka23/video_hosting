@@ -1,9 +1,14 @@
 @use '../../abstracts/variables' as var;
 
-.video {
+.video-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  // margin: 0 auto;
   .video-js {
     $br: 5px;
-    width: 120em;
+    width: 90%;
     border-radius: $br;
     
     .vjs-tech {
@@ -15,6 +20,11 @@
       color: var.$sky;
       background-color: rgba(43, 51, 63, 0.97);
     }
+  }
+
+  .video-under {
+    width: 100%;
+    padding: 5%;
   }
 
   &__title {

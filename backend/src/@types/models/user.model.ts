@@ -4,7 +4,7 @@ export default interface User {
   id: number,
   username: string,
   email: string,
-  password: string,
+  password: string | undefined,
   img: string,
   isBanned: boolean,
   banReason: string,

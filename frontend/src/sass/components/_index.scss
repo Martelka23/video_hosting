@@ -1,12 +1,24 @@
 @forward './app';
 
+@forward  './channels/channel-elem';
+@forward  './channels/channel-list';
+
+@forward './comments/comment-elem';
+@forward './comments/comments-list';
+@forward './comments/video-comments';
+
 @forward './forms/auth-form';
 
 @forward './navigation/navbar';
 @forward './navigation/sidebar';
 
 @forward './UI/chevron';
+@forward './UI/hr';
 @forward './UI/buttons/my-button';
 @forward './UI/inputs/my-input';
+@forward './UI/uploaders/image-uploader';
+
+@forward './users/user-elem';
+@forward './users/user-list';
 
 @forward './videos/video-stat';

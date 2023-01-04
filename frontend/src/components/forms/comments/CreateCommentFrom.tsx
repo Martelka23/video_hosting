@@ -8,6 +8,10 @@ interface CreateCommentFormProps {
 
 function CreateCommentForm({ submit }: CreateCommentFormProps) {
   const [commentText, setCommentText] = useState('');
+  const onSubmitClick = () => {
+    submit(commentText);
+    setCommentText('')
+  };
 
   return (
     <form className="create-comment-form" onSubmit={event => event.preventDefault()}>
@@ -16,7 +20,7 @@ function CreateCommentForm({ submit }: CreateCommentFormProps) {
         value={commentText}
         placeholder='comment'
       />
-      <MyButton onClick={() => submit(commentText)}>Send</MyButton>
+      <MyButton onClick={onSubmitClick}>Send</MyButton>
     </form>
   );
 }

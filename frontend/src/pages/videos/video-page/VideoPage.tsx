@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import videojs from 'video.js';
+import User from '../../../@types/models/user.model';
 import Video from '../../../@types/models/video.model';
 import VideoComments from '../../../components/comment/VideoComments';
+import Hr from '../../../components/UI/Hr';
 
 import VideoPlayer from '../../../components/video/Video';
 import VideoStat from '../../../components/video/VideoStat';
@@ -14,6 +16,7 @@ function VideoPage() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const video: Video | null = useAppSelector(state => state.videoReducer.currentVideo);
+  const currentUser: User | undefined = useAppSelector(state => state.usersReducer.currentUser);
 
   useEffect(() => {
     dispatch(VideosGetCurrentThunk({ id: Number(id) }));
@@ -31,17 +34,19 @@ function VideoPage() {
   };
 
   return (
-    <div className='video'>
+    <div className='video-page'>
       {
         video ?
           <React.Fragment>
             <VideoPlayer options={videoJsOptions} />
-            <h1 className='video__title'>{video.name}</h1>
-            <VideoStat video={video} />
-            <hr />
-            <p className='video__description'>{video.description}</p>
-            <hr />
-            <VideoComments videoId={Number(id)} />
+            <div className='video-under'>
+              <h1 className='video__title'>{video.name}</h1>
+              <VideoStat video={video} />
+              <Hr />
+              <p className='video__description'>{video.description}</p>
+              <Hr />
+              <VideoComments videoId={Number(id)} addCreateComment={currentUser !== undefined} />
+            </div>
           </React.Fragment>
           : <div>Loading</div>
       }

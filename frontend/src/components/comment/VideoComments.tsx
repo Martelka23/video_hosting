@@ -6,10 +6,11 @@ import CommentsList from "./CommentsList";
 import { CommentsCreateAsyncThunk, CommentsFindAsyncThunk } from '../../store/commentsSlice/thunks';
 
 interface VideoCommentsProps {
-  videoId: number
+  videoId: number,
+  addCreateComment: boolean
 }
 
-function VideoComments({ videoId }: VideoCommentsProps) {
+function VideoComments({ videoId, addCreateComment }: VideoCommentsProps) {
   const comments = useAppSelector(state => state.commentsReducer.comments);
   const dispatch = useAppDispatch();
 
@@ -17,14 +18,21 @@ function VideoComments({ videoId }: VideoCommentsProps) {
     dispatch(CommentsFindAsyncThunk({ videoId }));
   }, [dispatch]);
 
-  const createCommentHandler = (commentText: string) => {
-    dispatch(CommentsCreateAsyncThunk({ videoId: Number(videoId), text: commentText }))
+  const createCommentHandler = async (commentText: string) => {
+    await dispatch(CommentsCreateAsyncThunk({ videoId: Number(videoId), text: commentText }))
+    await dispatch(CommentsFindAsyncThunk({ videoId }));
   }
+
+  const LoginRequirement = (
+    <div className="login-requirement">
+      Login or Sign up to add comment
+    </div>
+  );
 
   return (
     <div className="video-comments">
-      <CreateCommentForm submit={createCommentHandler} />
-      <CommentsList comments={comments} />
+      {(addCreateComment) ? <CreateCommentForm submit={createCommentHandler} /> : LoginRequirement}
+      <CommentsList comments={comments ? comments.concat().reverse() : null} />
     </div>
   );
 }

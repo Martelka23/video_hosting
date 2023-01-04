@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MyInput from '../UI/inputs/MyInput';
 import MyButton from '../UI/buttons/MyButton';
 import User from '../../@types/models/user.model';
+import UserElem from '../users/UserElem';
 
 
 interface NavBarProps {
@@ -20,16 +21,7 @@ function NavBar({ user }: NavBarProps) {
 
   if (user) {
     console.log(user);
-    UserElement = (
-      <React.Fragment>
-        <Link to={`/users/profile/${user.id}`}>
-          <div className='navbar-user-image'>
-            <img src={'http://localhost:3005/api/images/' + user.img} />
-          </div>
-        </Link>
-        <span>{user.username}</span>
-      </React.Fragment>
-    );
+    UserElement = <UserElem user={user} />
     Buttons = (
       <React.Fragment>
         <Link to={'/auth/logout'}>

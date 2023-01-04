@@ -1,0 +1,6 @@
+@use '../../abstracts/variables' as var;
+
+.white-hr {
+  background-color: var.$white;
+  border: 1px solid var.$white;
+}

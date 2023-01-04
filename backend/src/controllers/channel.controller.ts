@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import { NextFunction, Request, Response } from "express";
 import { CreateChannelDto } from "../@types/dto/channel.dto";
 
@@ -11,8 +13,9 @@ class ChannelController {
   async create(req: Request, res: Response, _: NextFunction) {
     const createChannelDto: CreateChannelDto = req.body;
     const tokenPayload: TokenPayload = res.locals.tokenPayload;
+    const img = (req.file) ? req.file.filename : 'channel_images/default_img.jpg';
     
-    const createChannelDb: CreateChannelDb = { ...createChannelDto, userId: tokenPayload.id };
+    const createChannelDb: CreateChannelDb = { ...createChannelDto, userId: tokenPayload.id, img };
     const channel: Channel = await channelService.create(createChannelDb);
     res.json(channel);
   }

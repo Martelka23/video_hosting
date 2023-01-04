@@ -1,0 +1,33 @@
+@use '../../abstracts/variables' as var;
+
+.comment {
+  margin-bottom: 2em;
+  display: flex;
+
+  &__img img {
+    width: 3.5em;
+    height: 3.5em;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__body {
+    width: 100%;
+    margin-left: 1em;
+    word-break: break-all;
+  }
+
+  &__username {
+    font-weight: bold;
+    font-size: 1.13em;
+
+    a {
+      text-decoration: none;
+      color: var.$white;
+    }
+  }
+
+  &__text {
+    margin-top: 0.5em;
+  }
+}

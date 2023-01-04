@@ -1,10 +1,23 @@
 import userDal from "../dal/user.dal";
-import User from "../@types/models/user.model";
-import { FindUsersDto } from "../@types/dto/user.dto";
+import User, { CreateUserDb } from "../@types/models/user.model";
+import { FindUsersDto, UpdateUserDto } from "../@types/dto/user.dto";
 
 class UserService {
-  async find(findUsersDb: FindUsersDto): Promise<User[]> {
-    return await userDal.find(findUsersDb);
+  async create(createUserDb: CreateUserDb): Promise<User> {
+    return await userDal.create(createUserDb);
+  }
+
+  async find(findUsersDb: FindUsersDto, withPassword: boolean = false): Promise<User[]> {
+    const users = await userDal.find(findUsersDb);
+    if (!withPassword) {
+      users.forEach(user => user.password = undefined);
+    }
+
+    return users;
+  }
+
+  async update(userId: number, updateUserDb: UpdateUserDto): Promise<User> {
+    return await userDal.update(userId, updateUserDb);
   }
 }
 

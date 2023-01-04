@@ -10,8 +10,18 @@ class ChannelService {
     return await $api.get(`/channels/${objectToQueryString(conditions)}`);
   }
 
-  async create(createChannelDb: CreateChannelDto): Promise<AxiosResponse<Channel>> {
-    return await $api.post(`/channels/create`, createChannelDb);
+  async create(createChannelDto: CreateChannelDto): Promise<AxiosResponse<Channel>> {
+    const data = new FormData()
+    if (createChannelDto.image) {
+      data.append('image', createChannelDto.image);
+    }
+    data.append('name', createChannelDto.name);
+    data.append('description', createChannelDto.description);
+    return await $api.post(`/channels/create`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   }
 }
 

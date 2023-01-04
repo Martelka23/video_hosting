@@ -1,6 +1,7 @@
 export interface CreateChannelDto {
   name: string,
-  description: string
+  description: string,
+  image?: File
 }
 
 export interface FindChannelDto {

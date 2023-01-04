@@ -11,7 +11,7 @@ config({path: './.env'});
 class TokenService {
   generateTokens(payload: TokenPayload): JwtTokens {
     const refreshToken = jwt.sign(payload, process.env.JWT_REF_SEC as string, { expiresIn: '30d' });
-    const accessToken = jwt.sign(payload, process.env.JWT_ACC_SEC as string, { expiresIn: '15m' });
+    const accessToken = jwt.sign(payload, process.env.JWT_ACC_SEC as string, { expiresIn: '15d' });
 
     return { refreshToken, accessToken };
   }
