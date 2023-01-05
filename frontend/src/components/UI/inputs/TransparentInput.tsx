@@ -1,14 +1,14 @@
 import { ChangeEvent } from "react";
 
-interface MyInputProps {
+interface TransparentInputProps {
   value: string,
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   placeholder?: string,
 }
 
-function MyInput({ value, onChange, placeholder }: MyInputProps) {
+function TransparentInput({ value, onChange, placeholder }: TransparentInputProps) {
   return (
-    <input className="my-input"
+    <input className="transparent-input"
       value={value}
       onChange={onChange}
       placeholder={placeholder}
@@ -16,4 +16,4 @@ function MyInput({ value, onChange, placeholder }: MyInputProps) {
   );
 }
 
-export default MyInput;
+export default TransparentInput;

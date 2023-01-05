@@ -1,6 +1,6 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import MyButton from "../../UI/buttons/MyButton";
-import MyInput from "../../UI/inputs/MyInput";
+import TransparentInput from "../../UI/inputs/TransparentInput";
 
 interface CreateCommentFormProps {
   submit: (commentText: string) => void
@@ -15,7 +15,7 @@ function CreateCommentForm({ submit }: CreateCommentFormProps) {
 
   return (
     <form className="create-comment-form" onSubmit={event => event.preventDefault()}>
-      <MyInput 
+      <TransparentInput
         onChange={event => { setCommentText(event.target.value) }}
         value={commentText}
         placeholder='comment'
