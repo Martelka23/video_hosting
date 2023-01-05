@@ -4,6 +4,7 @@ import videojs from 'video.js';
 import User from '../../../@types/models/user.model';
 import Video from '../../../@types/models/video.model';
 import VideoComments from '../../../components/comment/VideoComments';
+import RoundButton from '../../../components/UI/buttons/RoundButton';
 import Hr from '../../../components/UI/Hr';
 
 import VideoPlayer from '../../../components/video/Video';
@@ -40,8 +41,13 @@ function VideoPage() {
           <React.Fragment>
             <VideoPlayer options={videoJsOptions} />
             <div className='video-under'>
-              <h1 className='video__title'>{video.name}</h1>
-              <VideoStat video={video} />
+              <div className='video-buttons-and-title'>
+                <div className='video-stat-and-title'>
+                  <h1 className='video-title'>{video.name}</h1>
+                  <VideoStat video={video} />
+                </div>
+                <RoundButton onClick={() => { }}>Subscribe</RoundButton>
+              </div>
               <Hr />
               <p className='video__description'>{video.description}</p>
               <Hr />

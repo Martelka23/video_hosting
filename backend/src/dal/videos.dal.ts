@@ -62,7 +62,6 @@ class VideosDal {
       RETURNING *
     `);
     const videoAntiDuplicate: VideoAntiDuplicate = sqlGenerator.camelcaseKeys(result.rows[0]);
-    // console.log(videoAntiDuplicate)
 
     return videoAntiDuplicate;
   }

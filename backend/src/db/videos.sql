@@ -1,5 +1,6 @@
 create table videos (
   id serial primary key,
+  createdAt timestamp not null,
   name varchar(255) not null,
   description text default '',
   preview varchar(255) default 'previews/default_img.jpg',

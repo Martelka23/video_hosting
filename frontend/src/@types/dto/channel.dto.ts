@@ -12,3 +12,12 @@ export interface FindChannelDto {
   subscribers?: number,
   userId?: number
 }
+
+export interface ChannelSubscribeDto {
+  channelId: number
+}
+
+export interface SubscribeCheckDto {
+  channelId: number,
+  userId: number
+}

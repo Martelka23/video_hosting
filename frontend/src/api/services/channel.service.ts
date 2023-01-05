@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios";
 import $api from "..";
 import { objectToQueryString } from "../tools";
 import Channel from "../../@types/models/channel.model";
-import { CreateChannelDto, FindChannelDto } from "../../@types/dto/channel.dto";
+import { ChannelSubscribeDto, CreateChannelDto, FindChannelDto, SubscribeCheckDto } from "../../@types/dto/channel.dto";
 
 class ChannelService {
   async find(conditions: FindChannelDto = {}): Promise<AxiosResponse<Channel[]>> {
@@ -22,6 +22,14 @@ class ChannelService {
         'Content-Type': 'multipart/form-data'
       }
     });
+  }
+
+  async subscribe(channelSubscribeDto: ChannelSubscribeDto): Promise<AxiosResponse<void>> {
+    return await $api.put('/channels/updateStat', channelSubscribeDto);
+  }
+
+  async subscribeCheck(subscribeCheckDto: SubscribeCheckDto): Promise<AxiosResponse<boolean>> {
+    return await $api.get(`/channels/subscribeCheck/${objectToQueryString(subscribeCheckDto)}`)
   }
 }
 

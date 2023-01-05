@@ -9,6 +9,6 @@ videosRouter.get('/', videoController.find);
 videosRouter.get('/watch/:id', videoController.watch);
 videosRouter.get('/selectedCheck', videoController.checkAntiDuplicate);
 videosRouter.put('/updateStat', isAuth, videoController.updateStat);
-videosRouter.post('/create', videoController.create);
+videosRouter.post('/create', isAuth, videoController.create);
 
 export default videosRouter;

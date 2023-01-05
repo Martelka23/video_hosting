@@ -37,7 +37,7 @@ class VideoController {
 
   @ControllerErrorHandler()
   async checkAntiDuplicate(req: Request, res: Response, _: NextFunction) {
-    if (!Object.keys(req.query).includes('videoId') || !Object.keys(req.query).includes('videoId')) {
+    if (!Object.keys(req.query).includes('userId') || !Object.keys(req.query).includes('videoId')) {
       throw ApiError.BadRequest('videoId or userId not found in query params');
     }
     const { userId, videoId } = req.query;

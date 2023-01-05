@@ -1,4 +1,3 @@
-
 import videoDal from "../dal/videos.dal";
 import Video from "../@types/models/videos.model";
 import { CheckAntiDuplicateDto, CreateVideoDto, FindVideoDto, VideoStatDto } from "../@types/dto/video.dto";

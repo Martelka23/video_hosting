@@ -8,6 +8,8 @@ const channelsRouter = Router();
 const upload = createMulter('channel_images', 'test')
 
 channelsRouter.get('/', channelController.find);
+channelsRouter.get('/subscribeCheck', channelController.checkAntiDuplicate);
+channelsRouter.put('/updateStat', isAuth, channelController.updateStat);
 channelsRouter.post('/create', isAuth, upload.single('image'), channelController.create);
 
 export default channelsRouter;

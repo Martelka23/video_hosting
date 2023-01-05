@@ -9,6 +9,7 @@ import VideoList from '../../components/video/VIdeoList';
 import { UsersGetUserProfileThunk } from '../../store/usersSlice/thunks';
 import UserElem from '../../components/users/UserElem';
 import Hr from '../../components/UI/Hr';
+import ChannelSubscribe from '../../components/channels/ChannelSubscribe';
 
 
 function ChannelPage() {
@@ -66,6 +67,7 @@ function ChannelPage() {
             </div>
           </div>
         </div>
+        {currentUser ? <ChannelSubscribe subscribeCheckDto={{ channelId: channel.id, userId: currentUser?.id }} /> : null}
         <Hr />
         <div className='channel-page__content'>
           <VideoList videos={videos} />

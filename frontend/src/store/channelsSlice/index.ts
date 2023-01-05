@@ -5,6 +5,7 @@ import { ChannelsState } from "./types";
 const initialState: ChannelsState = {
   channels: null,
   channel: null,
+  subscribed: false,
   isLoading: false,
   error: null
 };
