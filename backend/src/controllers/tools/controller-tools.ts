@@ -20,3 +20,19 @@ export function ControllerErrorHandler() {
     };
   };
 }
+
+export function prepareQueryParams(query: any) {
+  const result: {[index: string]: any} = {};
+  console.log(query)
+
+  for (let key of (Object.keys(query) as string[])) {
+    console.log(key)
+    if (query[key].includes(',')) {
+      result[key] = query[key].split(',');
+    } else {
+      result[key] = query[key];
+    }
+  }
+
+  return result;
+}

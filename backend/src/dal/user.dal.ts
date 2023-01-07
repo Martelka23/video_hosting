@@ -48,6 +48,20 @@ class UserDal {
 
     return user;
   }
+
+  async getSubscriptions(userId: number): Promise<number[]> {
+    const result = await pool.query(`
+      SELECT
+        channel_id
+      FROM
+        user_subscribtions
+      WHERE
+        user_id = ${userId}
+      `);
+      const channelIds: number[] = result.rows.map(value => value.channel_id);
+
+    return channelIds;
+  }
 }
 
 const userDal = new UserDal();

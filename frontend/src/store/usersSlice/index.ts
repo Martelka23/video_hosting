@@ -6,6 +6,7 @@ const initialState: UsersState = {
   users: [],
   userProfile: undefined,
   currentUser: undefined,
+  subscribedChannels: undefined,
   isLoading: false,
   error: null
 }

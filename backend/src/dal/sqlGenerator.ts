@@ -21,11 +21,15 @@ class SqlGenerator {
     return result;
   }
 
-  objectToString(object: DbObject, joinSubString: string): string {
+  objectToString(object: any, joinSubString: string): string {
     const keys = Object.keys(object);
     let list = [];
     for (let key of keys) {
-      list.push(`${this.camelToSnakeCase(key)} = ${this.quotesCheck(object[key])}`);
+      if (Array.isArray(object[key])) {
+        list.push(`${this.camelToSnakeCase(key)} IN (${object[key].map((value: any) => this.quotesCheck(value)).join(', ')})`)
+      } else {
+        list.push(`${this.camelToSnakeCase(key)} = ${this.quotesCheck(object[key])}`);
+      }
     }
     const string = list.join(joinSubString);
 

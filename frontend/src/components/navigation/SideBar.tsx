@@ -13,9 +13,9 @@ function SideBar({ user }: SideBarProps) {
   return (
     <nav className='sidebar'>
       <div className='sidebar__content'>
-        <Link to={'/'}>
+        <Link to={'/videos/subscriptions'}>
           <FontAwesomeIcon className='sidebar__content__img' icon={faHouse} />
-          <span>Home</span>
+          <span>Subscriptions</span>
         </Link>
         <Link to={'/users'}>
           <FontAwesomeIcon className='sidebar__content__img' icon={faUsers} />

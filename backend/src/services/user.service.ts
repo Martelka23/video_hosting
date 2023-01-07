@@ -26,6 +26,12 @@ class UserService {
 
     return await userDal.update(userId, updateUserDto);
   }
+
+  async getSubscriptions(userId: number): Promise<number[]> {
+    const channelIds = await userDal.getSubscriptions(userId);
+
+    return channelIds;
+  }
 }
 
 const userService = new UserService();

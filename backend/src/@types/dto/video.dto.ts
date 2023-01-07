@@ -11,7 +11,7 @@ export interface FindVideoDto {
   name?: string,
   description?: string,
   filepath?: string,
-  channel_id?: number
+  channel_id?: number | number[]
 }
 
 export interface VideoStatDto {

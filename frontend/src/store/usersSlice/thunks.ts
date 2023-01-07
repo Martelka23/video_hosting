@@ -43,3 +43,12 @@ export const UsersPutCurrentUserThunk = createAsyncThunk<
     return thunkErrorChecker(response, rejectWithValue, 'Update user error');
   }
 );
+
+export const UsersGetSubscriptionsThunk = createAsyncThunk<number[], number, { rejectValue: RequestError }>(
+  'users/subscriptions',
+  async function (userId, { rejectWithValue }): Promise<number[]> {
+    const response = await userService.getSubscrptions(userId);
+
+    return thunkErrorChecker(response, rejectWithValue, 'Get subscriptions error');
+  }
+)

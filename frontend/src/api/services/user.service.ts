@@ -27,6 +27,10 @@ class UserService {
       }
     });
   }
+
+  async getSubscrptions(userId: number): Promise<AxiosResponse<number[]>> {
+    return await $api.get(`/users/subscriptions/?userId=${userId}`);
+  }
 }
 
 const userService = new UserService();

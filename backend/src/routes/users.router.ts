@@ -9,6 +9,7 @@ const upload = createMulter('user_images', 'test');
 
 usersRouter.get('/', isAuth, userController.find);
 usersRouter.get('/current', isAuth, userController.getCurrentUser);
+usersRouter.get('/subscriptions', userController.getSubscriptions);
 usersRouter.put('/', isAuth, upload.single('image'), userController.update);
 
 export default usersRouter;

@@ -5,6 +5,7 @@ export interface UsersState {
   users: User[],
   userProfile: User | undefined,
   currentUser: User | undefined,
+  subscribedChannels: number[] | undefined,
   isLoading: boolean,
   error: RequestError | null
 }

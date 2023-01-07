@@ -5,6 +5,7 @@ import User from "../@types/models/user.model";
 import { ControllerErrorHandler } from "./tools/controller-tools";
 import { UpdateUserDto } from "../@types/dto/user.dto";
 import { TokenPayload } from "../@types/models/token.model";
+import ApiError from "../exceptions/api-error";
 
 
 class UserController {
@@ -33,6 +34,17 @@ class UserController {
 
     const updatedUser = await userService.update(tokenPayload.id, updateUserDto);
     res.json(updatedUser);
+  }
+
+  @ControllerErrorHandler()
+  async getSubscriptions(req: Request, res: Response, _: NextFunction) {
+    if (!Object.keys(req.query).includes('userId')) {
+      throw ApiError.BadRequest('userId not found in query params');
+    }
+    const userId: number = Number(req.query.userId);
+    const channelIds = await userService.getSubscriptions(userId);
+
+    res.json(channelIds);
   }
 }
 

@@ -3,7 +3,7 @@ import path from 'path';
 import { NextFunction, Request, Response } from "express";
 
 import videoService from "../services/video.service";
-import { ControllerErrorHandler } from './tools/controller-tools';
+import { ControllerErrorHandler, prepareQueryParams } from './tools/controller-tools';
 import Video from '../@types/models/videos.model';
 import { CheckAntiDuplicateDto, CreateVideoDto, FindVideoDto, VideoStatDto } from '../@types/dto/video.dto';
 import { TokenPayload } from '../@types/models/token.model';
@@ -14,7 +14,7 @@ import ApiError from '../exceptions/api-error';
 class VideoController {
   @ControllerErrorHandler()
   async find(req: Request, res: Response, _: NextFunction) {
-    const conditions: FindVideoDto = req.query;
+    const conditions: FindVideoDto = prepareQueryParams(req.query);
     console.log(conditions)
     const videos: Video[] = await videoService.find(conditions);
     const status = videos.length ? 200 : 204;
