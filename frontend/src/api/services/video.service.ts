@@ -7,7 +7,7 @@ import { CheckAntiDuplicateDto, CreateVideoDto, FindVideoDto, VideoStatDto } fro
 
 
 class VideoService {
-  async find(conditions?: FindVideoDto): Promise<AxiosResponse<Video[]>> {
+  async find(conditions: FindVideoDto = {}): Promise<AxiosResponse<Video[]>> {
     return await $api.get(`/videos/${objectToQueryString(conditions)}`);
   }
 

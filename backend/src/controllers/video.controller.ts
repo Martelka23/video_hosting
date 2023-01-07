@@ -15,6 +15,7 @@ class VideoController {
   @ControllerErrorHandler()
   async find(req: Request, res: Response, _: NextFunction) {
     const conditions: FindVideoDto = req.query;
+    console.log(conditions)
     const videos: Video[] = await videoService.find(conditions);
     const status = videos.length ? 200 : 204;
     res.status(status).json(videos);

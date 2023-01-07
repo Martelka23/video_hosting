@@ -18,6 +18,7 @@ import { usersGetCurrentUserThunk } from './store/usersSlice/thunks';
 import ChannelCreatePage from './pages/channels/ChannelCreatePage';
 import UserEdit from './pages/users/UserEdit';
 import ChannelEditPage from './pages/channels/ChannelEditPage';
+import AllVideosPage from './pages/videos/AllVideosPage';
 
 
 
@@ -44,6 +45,7 @@ function App() {
           <Route path='/channels/channel/:id' element={<ChannelPage />} />
           <Route path='/channels/channel/edit/:id' element={<ChannelEditPage />} />
 
+          <Route path='/videos' element={<AllVideosPage />} />
           <Route path='/videos/watch/:id' element={<VideoPage />} />
 
           <Route path='/auth/signup' element={<Signup />} />
