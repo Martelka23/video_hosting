@@ -1,5 +1,5 @@
 import { DbObject } from "../@types/database";
-import { ChannelSubscribeDto, FindChannelDto } from "../@types/dto/channel.dto";
+import { ChannelSubscribeDto, FindChannelDto, UpdateChannelDto } from "../@types/dto/channel.dto";
 import Channel, { CreateChannelDb } from "../@types/models/channel.model";
 import SubscribersAntiDuplicate from "../@types/models/subscribers-antiduplicate.model";
 import pool from "../db";
@@ -31,6 +31,34 @@ class ChannelDal {
     const channels: Channel[] = sqlGenerator.camelcaseKeys(result.rows) as Channel[];
 
     return channels;
+  }
+
+  async update(channelId: number, updateChannelDto: UpdateChannelDto): Promise<Channel> {
+    const setString = sqlGenerator.getSetString(updateChannelDto);
+    console.log(updateChannelDto)
+    console.log(`
+    UPDATE
+      channels
+    SET
+      ${setString}
+    WHERE
+      id = ${channelId}
+    RETURNING
+      *
+  `);
+    const result = await pool.query(`
+      UPDATE
+        channels
+      SET
+        ${setString}
+      WHERE
+        id = ${channelId}
+      RETURNING
+        *
+    `);
+    const channel: Channel = sqlGenerator.camelcaseKeys(result.rows[0]);
+
+    return channel;
   }
 
   async updateSubscribers(channelId: number, value: -1 | 1): Promise<Channel> {

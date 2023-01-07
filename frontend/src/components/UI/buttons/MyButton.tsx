@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 
 interface MyButtonProps {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void,
-  children: string
+  children: JSX.Element | string
 }
 
 function MyButton({ onClick, children }: MyButtonProps) {

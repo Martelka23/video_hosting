@@ -13,6 +13,12 @@ export interface FindChannelDto {
   userId?: number
 }
 
+export interface UpdateChannelDto {
+  name?: string,
+  description?: string,
+  img?: string
+}
+
 export interface ChannelSubscribeDto {
   channelId: number
 }

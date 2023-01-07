@@ -1,25 +1,26 @@
 import React, { useEffect } from "react";
-import { SubscribeCheckDto } from "../../@types/dto/channel.dto";
+import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ChannelsGetSubscribedCheckThunk, ChannelsSubscribeThunk } from "../../store/channelsSlice/thunks";
 import RoundButton from "../UI/buttons/RoundButton";
 
 interface ChannelSubscribeProps {
-  subscribeCheckDto: SubscribeCheckDto
+  channelId: number,
+  userId?: number
 }
 
-export default function ChannelSubscribe({ subscribeCheckDto }: ChannelSubscribeProps) {
+export default function ChannelSubscribe({ channelId, userId }: ChannelSubscribeProps) {
   const dispatch = useAppDispatch();
   const subscribed = useAppSelector(state => state.channelsReducer.subscribed)
 
   const updateInfo = async () => {
-    await dispatch(ChannelsGetSubscribedCheckThunk(subscribeCheckDto));
+    if (userId) {
+      await dispatch(ChannelsGetSubscribedCheckThunk({ channelId, userId }));
+    }
   };
 
   const onSubscribe = async () => {
-    console.log('sub');
-    await dispatch(ChannelsSubscribeThunk({ channelId: subscribeCheckDto.channelId }));
-    console.log('update')
+    await dispatch(ChannelsSubscribeThunk({ channelId: channelId }));
     await updateInfo();
   };
 
@@ -28,8 +29,18 @@ export default function ChannelSubscribe({ subscribeCheckDto }: ChannelSubscribe
   }, []);
 
   return (
-    <RoundButton onClick={onSubscribe}>
-      {subscribed ? 'Unsubscribe' : 'Subscribe'}
-    </RoundButton>
+    <>
+      {
+        userId
+          ? <RoundButton onClick={onSubscribe}>
+            {subscribed ? 'Unsubscribe' : 'Subscribe'}
+          </RoundButton>
+          : <Link to={'/auth/login'}>
+            <RoundButton onClick={() => { }}>
+              Subscribe
+            </RoundButton>
+          </Link>
+      }
+    </>
   );
 }

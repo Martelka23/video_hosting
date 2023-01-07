@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import $api from "..";
-import { FindUsersDto } from "../../@types/dto/user.dto";
+import { FindUsersDto, UpdateUserDto } from "../../@types/dto/user.dto";
 import User from "../../@types/models/user.model";
 import { objectToQueryString } from "../tools";
 
@@ -12,6 +12,20 @@ class UserService {
 
   async getCurrentUser(): Promise<AxiosResponse<User>> {
     return await $api.get('/users/current');
+  }
+
+  async updateUser(conditions: UpdateUserDto, newImage?: File): Promise<AxiosResponse<User>> {
+    const data = new FormData();
+    if (newImage) {
+      data.append('image', newImage);
+    }
+    data.append('updateUserDto', JSON.stringify(conditions));
+
+    return await $api.put('/users', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   }
 }
 

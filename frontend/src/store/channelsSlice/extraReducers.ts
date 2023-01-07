@@ -1,6 +1,6 @@
 import { ActionReducerMapBuilder, PayloadAction } from "@reduxjs/toolkit";
 
-import { ChannelsGetAllThunk, ChannelsGetOneThunk, ChannelsGetSubscribedCheckThunk } from "./thunks";
+import { ChannelsGetAllThunk, ChannelsGetOneThunk, ChannelsGetSubscribedCheckThunk, ChannelsUpdateThunk } from "./thunks";
 import { isError, isFulfilled, isPending } from "../store-tools/matchers";
 import { ChannelsState } from "./types";
 import RequestError from "../../@types/axios/error";
@@ -8,6 +8,9 @@ import Channel from "../../@types/models/channel.model";
 
 export const channelsExtraReducer = (builder: ActionReducerMapBuilder<ChannelsState>): void => {
   builder
+    .addCase(ChannelsGetAllThunk.pending, (state) => {
+      state.channels = null;
+    })
     .addCase(ChannelsGetAllThunk.fulfilled, (state, action: PayloadAction<Channel[]>) => {
       state.channels = action.payload;
       console.log(action.type)
@@ -16,6 +19,10 @@ export const channelsExtraReducer = (builder: ActionReducerMapBuilder<ChannelsSt
     .addCase(ChannelsGetOneThunk.fulfilled, (state, action: PayloadAction<Channel>) => {
       state.channel = action.payload;
       console.log(action.payload);
+    })
+
+    .addCase(ChannelsUpdateThunk.fulfilled, (state, action: PayloadAction<Channel>) => {
+      state.channel = action.payload;
     })
 
     .addCase(ChannelsGetSubscribedCheckThunk.fulfilled, (state, action: PayloadAction<boolean>) => {

@@ -1,7 +1,7 @@
 import { ActionReducerMapBuilder, PayloadAction } from "@reduxjs/toolkit";
 
 import { isError, isFulfilled, isPending } from "../store-tools/matchers";
-import { UsersGetAllThunk, UsersGetUserProfileThunk, usersGetCurrentUserThunk } from "./thunks";
+import { UsersGetAllThunk, UsersGetUserProfileThunk, usersGetCurrentUserThunk, UsersPutCurrentUserThunk } from "./thunks";
 import { UsersState } from "./types";
 import User from "../../@types/models/user.model";
 import RequestError from "../../@types/axios/error";
@@ -21,6 +21,10 @@ export const usersExtraReducer = (builder: ActionReducerMapBuilder<UsersState>) 
     .addCase(usersGetCurrentUserThunk.fulfilled, (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
       console.log('fullfiled current user');
+    })
+
+    .addCase(UsersPutCurrentUserThunk.fulfilled, (state, action: PayloadAction<User>) => {
+      state.currentUser = action.payload;
     })
 
     .addMatcher(isPending('users'), (state) => {

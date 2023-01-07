@@ -16,6 +16,8 @@ import SideBar from './components/navigation/SideBar';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { usersGetCurrentUserThunk } from './store/usersSlice/thunks';
 import ChannelCreatePage from './pages/channels/ChannelCreatePage';
+import UserEdit from './pages/users/UserEdit';
+import ChannelEditPage from './pages/channels/ChannelEditPage';
 
 
 
@@ -34,11 +36,13 @@ function App() {
       <div className='pages'>
         <Routes>
           <Route path='/users' element={<Users />} />
+          <Route path='/users/profile/edit' element={<UserEdit />} />
           <Route path='/users/profile/:id' element={<UserProfile />} />
 
           <Route path='/channels' element={<Channels />} />
           <Route path='/channels/create' element={<ChannelCreatePage />} />
           <Route path='/channels/channel/:id' element={<ChannelPage />} />
+          <Route path='/channels/channel/edit/:id' element={<ChannelEditPage />} />
 
           <Route path='/videos/watch/:id' element={<VideoPage />} />
 

@@ -7,8 +7,9 @@
 @forward './comments/comments-list';
 @forward './comments/video-comments';
 
-@forward './forms/auth-form';
-@forward './forms/create-comment-form';
+@forward './forms/auth/auth-form';
+@forward './forms/comment/create-comment-form';
+@forward './forms/user/edit-user-form';
 
 @forward './navigation/navbar';
 @forward './navigation/sidebar';
@@ -17,6 +18,7 @@
 @forward './UI/hr';
 @forward './UI/buttons/my-button';
 @forward './UI/buttons/round-button';
+@forward './UI/inputs/edit-input';
 @forward './UI/inputs/my-input';
 @forward './UI/inputs/transparent-input';
 @forward './UI/uploaders/image-uploader';

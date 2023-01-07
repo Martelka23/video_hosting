@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import userDal from "../dal/user.dal";
 import User, { CreateUserDb } from "../@types/models/user.model";
 import { FindUsersDto, UpdateUserDto } from "../@types/dto/user.dto";
@@ -16,8 +18,13 @@ class UserService {
     return users;
   }
 
-  async update(userId: number, updateUserDb: UpdateUserDto): Promise<User> {
-    return await userDal.update(userId, updateUserDb);
+  async update(userId: number, updateUserDto: UpdateUserDto): Promise<User> {
+    const users: User[] = await userDal.find({ id: userId });
+    if (updateUserDto.img && !users[0].img.endsWith('default_image.jpg')) {
+      fs.rmSync('/Users/martelka/Documents/Study/fullstack/projects/videos/backend/content/' + users[0].img);
+    }
+
+    return await userDal.update(userId, updateUserDto);
   }
 }
 

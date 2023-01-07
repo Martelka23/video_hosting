@@ -17,6 +17,12 @@ export interface ChannelSubscribeDto {
   channelId: number
 }
 
+export interface UpdateChannelDto {
+  name?: string,
+  description?: string,
+  img?: string
+}
+
 export interface SubscribeCheckDto {
   channelId: number,
   userId: number

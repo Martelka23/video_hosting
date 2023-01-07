@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ChannelList from '../../components/channels/ChannelList';
+import RoundButton from '../../components/UI/buttons/RoundButton';
 import Hr from '../../components/UI/Hr';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { ChannelsGetAllThunk } from '../../store/channelsSlice/thunks';
@@ -20,7 +21,7 @@ function UserProfile(props: UserProfileProps) {
 
   useEffect(() => {
     dispatch(UsersGetUserProfileThunk(Number(id)));
-    dispatch(ChannelsGetAllThunk({userId: Number(id)}))
+    dispatch(ChannelsGetAllThunk({ userId: Number(id) }))
   }, [id]);
 
   if (!user) {
@@ -30,6 +31,14 @@ function UserProfile(props: UserProfileProps) {
       </div>
     );
   } else {
+    const EditButton = user.id === currentUser?.id
+      ? (
+        <Link to={'/users/profile/edit'}>
+          <RoundButton onClick={() => { }}>Edit profile</RoundButton>
+        </Link>
+      )
+      : null;
+
     return (
       <div className='user-profile'>
         <div className='user-profile__head'>
@@ -49,8 +58,8 @@ function UserProfile(props: UserProfileProps) {
             <span className='user-profile__ban'>
               {user.isBanned ? 'User blocked' : 'User has no block'}
             </span>
-            <span className='user-profile__you'>
-              {user.id === currentUser?.id ? 'It\'s you!' : null}
+            <span className='user-profile__edit'>
+              {EditButton}
             </span>
           </div>
         </div>

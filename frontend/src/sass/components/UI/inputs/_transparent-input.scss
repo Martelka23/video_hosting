@@ -1,19 +1,28 @@
 @use '../../../abstracts/variables' as var;
 
 .transparent-input {
-  outline: none;
-  padding: 0.5em;
-  height: 3em;
-  font-size: 1rem;
-  transition: all 0.3s;
   width: 100%;
-  background: none;
-  border: none;
-  caret-color: var.$white;
-  color: var.$white;
-  border-bottom: 2px solid var.$white;
 
-  &:focus {
-    border-bottom: 2px solid var.$sky;
+  input {
+    outline: none;
+    padding: 0.5em;
+    height: 3em;
+    font-size: 1rem;
+    transition: all 0.3s;
+    width: 100%;
+    background: none;
+    border: none;
+    caret-color: var.$white;
+    color: var.$white;
+    border-bottom: 2px solid var.$white;
+
+    &:focus {
+      border-bottom: 2px solid var.$sky;
+    }
+  }
+
+  label {
+    font-size: 1.2em;
+    font-weight: bold;
   }
 }

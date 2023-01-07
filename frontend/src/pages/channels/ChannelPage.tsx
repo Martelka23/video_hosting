@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import Video from '../../@types/models/video.model';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -10,6 +10,7 @@ import { UsersGetUserProfileThunk } from '../../store/usersSlice/thunks';
 import UserElem from '../../components/users/UserElem';
 import Hr from '../../components/UI/Hr';
 import ChannelSubscribe from '../../components/channels/ChannelSubscribe';
+import RoundButton from '../../components/UI/buttons/RoundButton';
 
 
 function ChannelPage() {
@@ -38,20 +39,28 @@ function ChannelPage() {
       </div>
     );
   } else {
-    const owner = channel.userId === currentUser?.id ? 'It is your channel' : (
+    const owner = channel.userId !== currentUser?.id ? (
       <React.Fragment>
         <span>Channel owner</span>
         {ownerUser ? <UserElem user={ownerUser} /> : null}
       </React.Fragment>
-    );
+    ) : null;
+
+    const channelButton = channel.userId !== currentUser?.id
+      ? <ChannelSubscribe channelId={channel.id} userId={currentUser?.id} />
+      : <Link to={`/channels/channel/edit/${channel.id}`}>
+        <RoundButton onClick={() => { }}>Edit channel</RoundButton>
+      </Link>
+
     return (
       <div className='channel-page'>
         <div className='channel-page__head'>
-          <div className='user-profile__img'>
+          <div className='channel-page__left'>
             <img
               src={`http://localhost:3005/api/images/${channel.img}`}
               alt="channel-photo"
             />
+            {channelButton}
           </div>
           <div className='channel-page__info'>
             <div>
@@ -67,7 +76,6 @@ function ChannelPage() {
             </div>
           </div>
         </div>
-        {currentUser ? <ChannelSubscribe subscribeCheckDto={{ channelId: channel.id, userId: currentUser?.id }} /> : null}
         <Hr />
         <div className='channel-page__content'>
           <VideoList videos={videos} />

@@ -20,3 +20,8 @@ export interface FindUsersDto {
   isActivated?: boolean,
   role?: string
 }
+
+export interface UpdateUserDto {
+  username?: string,
+  email?: string,
+}

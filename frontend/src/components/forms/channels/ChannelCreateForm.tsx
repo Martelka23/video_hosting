@@ -42,6 +42,7 @@ function ChannelCreateForm({ onSubmit }: ChannelCreateFormProps) {
       <ImageUploader
         label="Channel Image"
         onChange={onImageUpload}
+        fileLoaded={image !== undefined}
       />
       <MyButton onClick={onClick}>Create</MyButton>
     </form>

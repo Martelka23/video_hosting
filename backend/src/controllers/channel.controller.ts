@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-import { ChannelSubscribeDto, CreateChannelDto } from "../@types/dto/channel.dto";
+import { ChannelSubscribeDto, CreateChannelDto, UpdateChannelDto } from "../@types/dto/channel.dto";
 import Channel, { CreateChannelDb } from "../@types/models/channel.model";
 import { TokenPayload } from "../@types/models/token.model";
 import ApiError from "../exceptions/api-error";
@@ -12,7 +12,7 @@ class ChannelController {
   async create(req: Request, res: Response, _: NextFunction) {
     const createChannelDto: CreateChannelDto = req.body;
     const tokenPayload: TokenPayload = res.locals.tokenPayload;
-    const img = (req.file) ? req.file.filename : 'channel_images/default_img.jpg';
+    const img = `channel_images/${req.file ? req.file.filename : 'default_img.jpg'}`;
     
     const createChannelDb: CreateChannelDb = { ...createChannelDto, userId: tokenPayload.id, img };
     const channel: Channel = await channelService.create(createChannelDb);
@@ -27,6 +27,19 @@ class ChannelController {
     } else {
       res.status(404).json({ message: "Channel not found!" });
     }
+  }
+
+  @ControllerErrorHandler()
+  async update(req: Request, res: Response, _: NextFunction) {
+    const channelId: number = req.body.channelId;
+    const updateChannelDto: UpdateChannelDto = JSON.parse(req.body.updateChannelDto);
+    const tokenPayload: TokenPayload = res.locals.tokenPayload;
+    if (req.file) {
+      updateChannelDto.img = `channel_images/${req.file.filename}`;
+    }
+    const channel: Channel = await channelService.update(channelId, tokenPayload.id, updateChannelDto);
+    
+    res.json(channel);
   }
 
   @ControllerErrorHandler()
